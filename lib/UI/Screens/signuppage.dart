@@ -1,3 +1,4 @@
+import 'package:event_ease/UI/Screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class signup extends StatelessWidget {
@@ -163,29 +164,34 @@ class signup extends StatelessWidget {
             Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 50),
-                child: Container(
-                    width: 200,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0xff7D7D7D),
-                          spreadRadius: -1,
-                          blurRadius: 7,
-                          offset: Offset(0, 10),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(30),
-                      color: Color(0XFF2f9494),
-                    ),
-                    child: Center(
-                        child: Text(
-                          "Signup",
-                          style: TextStyle(
-                              fontFamily: "Bebas",
-                              fontSize: 25,
-                              color: Colors.white),
-                        ))),
+                child: InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=> loginpage()));
+                  },
+                  child: Container(
+                      width: 200,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xff7D7D7D),
+                            spreadRadius: -1,
+                            blurRadius: 7,
+                            offset: Offset(0, 10),
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(30),
+                        color: Color(0XFF2f9494),
+                      ),
+                      child: Center(
+                          child: Text(
+                            "Signup",
+                            style: TextStyle(
+                                fontFamily: "Bebas",
+                                fontSize: 25,
+                                color: Colors.white),
+                          ))),
+                ),
               ),
 
             ),

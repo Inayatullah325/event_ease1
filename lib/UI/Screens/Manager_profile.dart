@@ -10,6 +10,7 @@ class ManagerProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      backgroundColor: Color(0xFFF5FCFC),
       appBar: AppBar(
 
         title: Text('Manager Profile',style: GoogleFonts.kalam(
@@ -209,12 +210,77 @@ class ManagerProfile extends StatelessWidget {
                             labelStyle: TextStyle(fontWeight: FontWeight.bold)),
                       ),
                     ),
-                    //
-
+                    //Team Member
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(11),
+                              borderSide: BorderSide(
+                                width: 1,
+                                color: Colors.black,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(11),
+                              borderSide:
+                              BorderSide(width: 2, color: Colors.black),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(11),
+                            ),
+                            suffixIcon: Icon(Icons.edit),
+                            prefixIcon: Icon(
+                              Icons.group,
+                              color: Colors.black,
+                            ),
+                            hintText: 'Enter the number of team members...',
+                            hintStyle: TextStyle(color: Colors.grey),
+                            labelText: 'Number of Members',
+                            labelStyle:
+                            TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    //Description
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: TextField(
+                        maxLines: 5,
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(11),
+                              borderSide: BorderSide(
+                                width: 1,
+                                color: Colors.black,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(11),
+                              borderSide: BorderSide(
+                                  width: 2, color: Colors.black),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(11),
+                            ),
+                            suffixIcon: Icon(Icons.edit),
+                            prefixIcon: Icon(
+                              Icons.description,
+                              color: Colors.black,
+                            ),
+                            hintText: 'Enter a brief description about your services...',
+                            hintStyle: TextStyle(color: Colors.grey),
+                            labelText: 'Description',
+                            labelStyle:
+                            TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
+            //Save Button
             Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 50),

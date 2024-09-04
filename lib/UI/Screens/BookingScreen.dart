@@ -68,7 +68,9 @@ class _BookingScreenState extends State<BookingScreen> {
                   height: 50,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                 //   color: Colors.grey,
+
+                    borderRadius: BorderRadius.circular(20),
+                   color: Colors.grey,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -253,7 +255,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 suffixIcon: Icon(Icons.edit),
                 prefixIcon: Icon(Icons.calendar_month)
             ),
-            onTap: () => _selectDate(context), // Opens the date picker
+            onTap: () => _selectDate(context),
           ),
         ),
         Column(
@@ -344,7 +346,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   color: Color(0XFF2f9494),
                   borderRadius: BorderRadius.circular(20)
                 ),
-                child: Center(child: Text('Booked',style: GoogleFonts.kalam(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),)),
+                child: Center(child: Text('Book Now',style: GoogleFonts.kalam(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),)),
               ),
             )
           ],

@@ -53,7 +53,7 @@ class _DashBoardState extends State<DashBoard> {
 
     return Scaffold(
 
-      //backgroundColor: Color(0xFF000103),
+      backgroundColor: Color(0xFFF5FCFC),
 
       appBar: AppBar(
         title: Text('Event Ease ' ,style: GoogleFonts.kalam(
@@ -143,7 +143,7 @@ class _DashBoardState extends State<DashBoard> {
                     ),
                   );
                 },
-                         ),
+               ),
              ),
            ),
         ],

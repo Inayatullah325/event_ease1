@@ -7,6 +7,7 @@ import 'package:event_ease/UI/Screens/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'UI/Screens/BookingScreen.dart';
 import 'UI/Screens/Manager_profile.dart';
 import 'UI/Screens/UserProfile.dart';
 import 'UI/Screens/login_screen.dart';

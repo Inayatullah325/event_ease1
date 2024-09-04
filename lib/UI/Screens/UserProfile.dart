@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:event_ease/UI/Screens/BookingScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -11,7 +12,7 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-     // backgroundColor: Color(0XFFABD0BC),
+      backgroundColor: Color(0xFFF5FCFC),
       appBar: AppBar(
 
         title: Text('My Profile',style: GoogleFonts.kalam(
@@ -219,29 +220,34 @@ class UserProfile extends StatelessWidget {
         Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 50),
-            child: Container(
-                width: 200,
-                height: 60,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(0xff7D7D7D),
-                      spreadRadius: -1,
-                      blurRadius: 7,
-                      offset: Offset(0, 10),
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(30),
-                  color: Color(0XFF2f9494),
-                ),
-                child: Center(
-                    child: Text(
-                      "Save",
-                      style: TextStyle(
-                          fontFamily: "Bebas",
-                          fontSize: 25,
-                          color: Colors.white),
-                    ))),
+            child: InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (_)=> BookingScreen()));
+              },
+              child: Container(
+                  width: 200,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xff7D7D7D),
+                        spreadRadius: -1,
+                        blurRadius: 7,
+                        offset: Offset(0, 10),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(30),
+                    color: Color(0XFF2f9494),
+                  ),
+                  child: Center(
+                      child: Text(
+                        "Save",
+                        style: TextStyle(
+                            fontFamily: "Bebas",
+                            fontSize: 25,
+                            color: Colors.white),
+                      ))),
+            ),
           ),
         ),
       ],

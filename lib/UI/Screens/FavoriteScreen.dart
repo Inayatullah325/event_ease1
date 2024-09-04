@@ -17,6 +17,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   Widget build(BuildContext context) {
     final favoriteprovider = Provider.of<favprovider>(context, listen: false);
     return Scaffold(
+      backgroundColor: Color(0xFFF5FCFC),
 
       appBar: AppBar(
         title: Text(
