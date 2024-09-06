@@ -31,24 +31,23 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
       body: Column(
         children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: favoriteprovider.favorite.length,
-              itemBuilder: (context, index) {
-                return Consumer<favprovider>(builder: (context, vm, child) {
+          Consumer<favprovider>(builder: (context, vm, child) {
+            return Expanded(
+              child: ListView.builder(
+                itemCount: vm.favorite.length,
+                itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(vm.Managers[index]['title']),
-                    subtitle: Text(vm.Managers[index]['address']),
-                    leading: CircleAvatar(backgroundImage: AssetImage(vm.Managers[index]['image']),),
+                    title: Text(vm.favorite[index]['title']),
+                    subtitle: Text(vm.favorite[index]['address']),
+                    leading: CircleAvatar(backgroundImage: AssetImage(vm.favorite[index]['image']),),
                     trailing: InkWell(onTap: (){
-                      favoriteprovider.removeitem(index);
+                      favoriteprovider.removeitem(vm.favorite[index]);
                     },child: Icon(Icons.favorite)),
                   );
                 },
-
-                );
-              },
-            ),
+              ),
+            );
+          },
           )
         ],
       ),

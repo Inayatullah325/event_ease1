@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'Manager_details.dart';
 
@@ -57,7 +58,7 @@ class _DashBoardState extends State<DashBoard> {
 
       appBar: AppBar(
         title: Text('Event Ease ' ,style: GoogleFonts.kalam(
-            fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white),),
+            fontWeight: FontWeight.bold,fontSize: 22.sp,color: Colors.white),),
         backgroundColor: Color(0XFF2f9494),
         centerTitle: true,
       ),
@@ -85,8 +86,8 @@ class _DashBoardState extends State<DashBoard> {
                 itemBuilder: (context, int index){
 
                   return Container(
-                    height: 200,
-                    width: 200,
+                   height: MediaQuery.of(context).size.height*0.3,
+                    width: MediaQuery.of(context).size.width*0.2,
                     decoration: BoxDecoration(
                       color: Color(0xffe5e7e9),
                       borderRadius: BorderRadius.only(
@@ -102,7 +103,8 @@ class _DashBoardState extends State<DashBoard> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            height: 123,
+                            height: MediaQuery.of(context).size.height*0.16,
+                           // height: 123,
                             decoration: BoxDecoration(
                               image: DecorationImage(image: AssetImage(Events[index]['image']),
                                   fit: BoxFit.cover),
@@ -115,13 +117,16 @@ class _DashBoardState extends State<DashBoard> {
                               fontWeight: FontWeight.bold),),
 
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Center(
                                 child: Center(
                                   child: Container(
-                                    height: 20,
-                                    width: 169,
+                                    height: MediaQuery.of(context).size.height*0.021,
+                                    width: MediaQuery.of(context).size.width*0.46,
+
+                                    // height: 20,
+                                    // width: 169,
                                     decoration: BoxDecoration(
                                         color: Color(0XFF2f9494),
                                         borderRadius: BorderRadius.only(

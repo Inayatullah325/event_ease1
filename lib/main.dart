@@ -1,11 +1,14 @@
 
+
 import 'package:event_ease/Provider/managerlist_provider.dart';
 import 'package:event_ease/UI/Screens/Dashboard.dart';
 import 'package:event_ease/UI/Screens/Manager_details.dart';
 import 'package:event_ease/UI/Screens/navigationbottombar.dart';
 import 'package:event_ease/UI/Screens/splashscreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'UI/Screens/BookingScreen.dart';
 import 'UI/Screens/Manager_profile.dart';
@@ -13,9 +16,19 @@ import 'UI/Screens/UserProfile.dart';
 import 'UI/Screens/login_screen.dart';
 import 'UI/Screens/navigationbuttombarr.dart';
 import 'UI/Screens/signuppage.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(ResponsiveSizer (
+    builder: (context, orientation, ScreenType){
+      return MyApp();
+
+    },
+  ));
 }
 
 class MyApp extends StatelessWidget {

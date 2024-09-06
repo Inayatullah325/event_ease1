@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ManagerProfile extends StatelessWidget {
   const ManagerProfile({super.key});
@@ -14,7 +15,7 @@ class ManagerProfile extends StatelessWidget {
       appBar: AppBar(
 
         title: Text('Manager Profile',style: GoogleFonts.kalam(
-            fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white),),
+            fontWeight: FontWeight.bold,fontSize: 22.sp,color: Colors.white),),
         backgroundColor: Color(0XFF2f9494),
 
         centerTitle: true,
@@ -285,8 +286,8 @@ class ManagerProfile extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 50),
                 child: Container(
-                    width: 200,
-                    height: 60,
+                    height: MediaQuery.of(context).size.height*0.08,
+                    width: MediaQuery.of(context).size.width*0.4,
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
@@ -302,9 +303,10 @@ class ManagerProfile extends StatelessWidget {
                     child: Center(
                         child: Text(
                           "Save",
-                          style: TextStyle(
-                              fontFamily: "Bebas",
-                              fontSize: 25,
+                          style: GoogleFonts.kalam(
+                             // fontFamily: "Bebas",
+                              fontSize: 22.sp,
+                              fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ))),
               ),

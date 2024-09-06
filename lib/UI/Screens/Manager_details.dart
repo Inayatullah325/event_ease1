@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class managerdetails extends StatefulWidget {
   const managerdetails({super.key});
@@ -32,10 +33,9 @@ class _managerdetailsState extends State<managerdetails> {
   String searchQuery = '';
   @override
   Widget build(BuildContext context) {
-    final obj = Provider.of<favprovider>(context);
     final obj_favprovider = Provider.of<favprovider>(context);
 
-    List<Map<dynamic, dynamic>> filteredManagers = obj.Managers.where((manager) {
+    List<Map<dynamic, dynamic>> filteredManagers = obj_favprovider.Managers.where((manager) {
       return manager['title'].toLowerCase().contains(searchQuery.toLowerCase()) ||
           manager['address'].toLowerCase().contains(searchQuery.toLowerCase());
     }).toList();
@@ -46,7 +46,7 @@ class _managerdetailsState extends State<managerdetails> {
           title: Text(
             'Manager List',
             style: GoogleFonts.kalam(
-                fontSize: 35, fontWeight: FontWeight.bold, color: Colors.white),
+                fontSize: 22.sp, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           backgroundColor: Color(0XFF2f9494),
           centerTitle: true,
@@ -79,7 +79,7 @@ class _managerdetailsState extends State<managerdetails> {
 
               Expanded(
                 child: ListView.builder(
-                    itemCount: obj.Managers.length,
+                    itemCount: obj_favprovider.Managers.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Card(
                         color: colors[index],
@@ -89,32 +89,36 @@ class _managerdetailsState extends State<managerdetails> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => ManagerHistory(
-                                          title: obj.Managers[index]['title']
+                                          title: obj_favprovider.Managers[index]['title']
                                               .toString(),
-                                          image: obj.Managers[index]['image']
+                                          image: obj_favprovider.Managers[index]['image']
                                               .toString(),
-                                          address: obj.Managers[index]
+                                          address: obj_favprovider.Managers[index]
                                               ['address'],
                                         )));
                           },
-                          child: ListTile(
-                            leading: CircleAvatar(
-                                backgroundImage:
-                                    AssetImage(obj.Managers[index]['image'])),
-                            title: Text(obj.Managers[index]['title']),
-                            subtitle: Text(obj.Managers[index]['address']),
-                            trailing: InkWell(
-                              onTap: () {
-                                obj_favprovider.favorite.contains(index)
-                                    ? obj_favprovider.removeitem(index)
-                                    : obj_favprovider.additem(index);
-                              },
-                              child: obj_favprovider.favorite.contains(index)
-                                  ? Icon(Icons.favorite)
-                                  : Icon(
-                                      Icons.favorite_border_outlined,
-                                    ),
-                            ),
+                          child: Consumer<favprovider>(builder: (context, vm, child) {
+                            return ListTile(
+                              leading: CircleAvatar(
+                                  backgroundImage:
+                                  AssetImage(obj_favprovider.Managers[index]['image'].toString())),
+                              title: Text(obj_favprovider.Managers[index]['title']),
+                              subtitle: Text(obj_favprovider.Managers[index]['address']),
+                              trailing: InkWell(
+                                onTap: () {
+                                  vm.favorite.contains(obj_favprovider.Managers[index])
+                                      ? vm.removeitem(obj_favprovider.Managers[index])
+                                      : obj_favprovider.additem(obj_favprovider.Managers[index]);
+                                },
+                                child: vm.favorite.contains(obj_favprovider.Managers[index])
+                                    ? Icon(Icons.favorite,color: Colors.red,)
+                                    : Icon(
+                                  Icons.favorite_border_outlined,
+                                ),
+                              ),
+                            );
+                          },
+
                           ),
                         ),
                       );

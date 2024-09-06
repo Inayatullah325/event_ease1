@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
@@ -12,6 +13,7 @@ class _BookingScreenState extends State<BookingScreen> {
   bool isselected = false;
   bool isselected1 = false;
   bool isselected2 = false;
+  bool isselected3 = false;
   bool isOpen = false;
   String Eventtypes = 'Event Types';
   List<String> typesofevents = ['Marriage', 'Engagement', 'Birthday', 'Anniversary', 'Get-Togethers',
@@ -48,7 +50,7 @@ class _BookingScreenState extends State<BookingScreen> {
         title: Text(
           'Events Booking',
           style: GoogleFonts.kalam(
-              fontWeight: FontWeight.bold, fontSize: 35, color: Colors.white),
+              fontWeight: FontWeight.bold, fontSize: 22.sp, color: Colors.white),
         ),
         backgroundColor: Color(0XFF2f9494),
         centerTitle: true,
@@ -58,14 +60,14 @@ class _BookingScreenState extends State<BookingScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              SizedBox(height: 50,),
+              SizedBox(height: 7.h,),
               InkWell(
                 onTap: () {
                   isOpen = !isOpen;
                   setState(() {});
                 },
                 child: Container(
-                  height: 50,
+                  height: 8.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
 
@@ -73,7 +75,7 @@ class _BookingScreenState extends State<BookingScreen> {
                    color: Colors.grey,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding:   EdgeInsets.symmetric(horizontal: 3.h),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -115,7 +117,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 enabledBorder: UnderlineInputBorder(
                   // borderRadius: BorderRadius.circular(11),
                   borderSide: BorderSide(
-                    width: 1,
+                    width: 0.3.w,
                     color: Colors.black,
                   ),
                 ),
@@ -145,7 +147,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 enabledBorder: UnderlineInputBorder(
                  // borderRadius: BorderRadius.circular(11),
                   borderSide: BorderSide(
-                    width: 1,
+                    width: 0.3.w,
                     color: Colors.black,
                   ),
                 ),
@@ -174,14 +176,12 @@ class _BookingScreenState extends State<BookingScreen> {
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
-                  //borderRadius: BorderRadius.circular(11),
                   borderSide: BorderSide(
-                    width: 1,
+                    width: 0.3.w,
                     color: Colors.black,
                   ),
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  //borderRadius: BorderRadius.circular(11),
                   borderSide:
                   BorderSide(width: 2, color: Colors.black),
                 ),
@@ -200,7 +200,7 @@ class _BookingScreenState extends State<BookingScreen> {
           ),
 
         ),
-        SizedBox(height: 20),
+        SizedBox(height: 1.h),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextField(
@@ -219,7 +219,7 @@ class _BookingScreenState extends State<BookingScreen> {
             ),
           ),
         ),
-        SizedBox(height: 20),
+        SizedBox(height: 1.h),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextField(
@@ -228,6 +228,7 @@ class _BookingScreenState extends State<BookingScreen> {
             decoration: InputDecoration(
               labelText: 'Budget',
               hintText: 'Enter your budget for the event',
+                hintStyle: TextStyle(color: Colors.grey),
               labelStyle: TextStyle(fontWeight: FontWeight.bold),
               border: UnderlineInputBorder(
                 borderSide:
@@ -247,7 +248,7 @@ class _BookingScreenState extends State<BookingScreen> {
             decoration: InputDecoration(
               labelText: 'Event Date',
               hintText: 'Select the event date',
-                labelStyle: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                labelStyle: TextStyle(fontSize: 17.sp,fontWeight: FontWeight.bold),
               border: UnderlineInputBorder(
                 borderSide:
                 BorderSide(width: 2, color: Colors.black),
@@ -261,7 +262,7 @@ class _BookingScreenState extends State<BookingScreen> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Event Time", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+            Text("Event Time", style: TextStyle(fontSize: 19.sp,fontWeight: FontWeight.bold)),
             Row(
               children: [
                 Radio<String>(
@@ -273,7 +274,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     });
                   },
                 ),
-                Text('Day', style: TextStyle(fontSize: 16)),
+                Text('Day', style: TextStyle(fontSize: 16.sp)),
                 Radio<String>(
                   value: 'Evening',
                   groupValue: eventTime,
@@ -283,14 +284,14 @@ class _BookingScreenState extends State<BookingScreen> {
                     });
                   },
                 ),
-                Text('Evening', style: TextStyle(fontSize: 16)),
+                Text('Evening', style: TextStyle(fontSize: 16.sp)),
               ],
             ),
           ],
         ),
 
 
-        Text("Services:", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),),
+        Text("Services:", style: TextStyle(fontSize: 19.sp,fontWeight: FontWeight.bold,),),
         Row(
           children: [
             Checkbox(
@@ -317,7 +318,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 isselected1=value!;
               });
             }),
-            Text('Entertainment'),
+            Text('Cake'),
           ],
 
         ),
@@ -330,6 +331,21 @@ class _BookingScreenState extends State<BookingScreen> {
                 value:isselected2, onChanged: (value){
               setState(() {
                 isselected2=value!;
+              });
+            }),
+            Text('Entertainment'),
+          ],
+
+        ),
+        Row(
+          children: [
+            Checkbox(
+
+                activeColor: Colors.black,
+                checkColor: Colors.white,
+                value:isselected3, onChanged: (value){
+              setState(() {
+                isselected3=value!;
               });
             }),
             Text('Photogrphy'),
@@ -346,7 +362,8 @@ class _BookingScreenState extends State<BookingScreen> {
                   color: Color(0XFF2f9494),
                   borderRadius: BorderRadius.circular(20)
                 ),
-                child: Center(child: Text('Book Now',style: GoogleFonts.kalam(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),)),
+                child: Center(child: Text('Book Now',style: GoogleFonts.kalam(fontSize: 20.sp,
+                    fontWeight: FontWeight.bold,color: Colors.white),)),
               ),
             )
           ],

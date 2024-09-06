@@ -1,6 +1,8 @@
 import 'package:event_ease/UI/Screens/Dashboard.dart';
+import 'package:event_ease/UI/Screens/ForgotPassword.dart';
 import 'package:event_ease/UI/Screens/navigationbuttombarr.dart';
 import 'package:event_ease/UI/Screens/signuppage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,6 +15,14 @@ class loginpage extends StatefulWidget {
 }
 
 class _eventeaseState extends State<loginpage> {
+
+  TextEditingController NameController = TextEditingController();
+  TextEditingController EmailController = TextEditingController();
+  TextEditingController PasswordController = TextEditingController();
+
+  User? userid=FirebaseAuth.instance.currentUser;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +52,7 @@ class _eventeaseState extends State<loginpage> {
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: TextField(
+                            controller: NameController,
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(11),
@@ -73,6 +84,7 @@ class _eventeaseState extends State<loginpage> {
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: TextField(
+                            controller: EmailController,
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(11),
@@ -106,6 +118,7 @@ class _eventeaseState extends State<loginpage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
+                            controller: PasswordController,
                             //keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -139,11 +152,32 @@ class _eventeaseState extends State<loginpage> {
                       ],
                     ),
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 50),
                       child: InkWell(
-                        onTap: (){
+                        onTap: ()async{
+                          var loginEmail =  EmailController.text.toString().trim();
+                          var loginpasword = PasswordController.text.toString().trim();
+
+                          try{
+                            final User? FirebaseUser =(await FirebaseAuth.instance.signInWithEmailAndPassword(
+                                email:loginEmail , password:loginpasword ))
+
+                                .user;
+                            if (FirebaseUser != null){
+                              Navigator.push(context, MaterialPageRoute(builder: (_)=> navigationbuttombarr()));
+
+                            }
+                            else{
+                              print('check email and password');
+                            }
+                          }on FirebaseAuthException catch(e){
+                            print(e);
+                          }
                           Navigator.push(context, MaterialPageRoute(builder: (_)=> navigationbuttombarr()));
                         },
                         child: Container(
@@ -179,7 +213,9 @@ class _eventeaseState extends State<loginpage> {
                   Column(
                     //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      TextButton(onPressed: (){}, child: Text('Forgot Password')),
+                      TextButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => ForgotPassword()));
+                      }, child: Text('Forgot Password')),
 
                     ],
                   ),

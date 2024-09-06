@@ -5,6 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
+import 'Manager_profile.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});
@@ -16,7 +19,7 @@ class UserProfile extends StatelessWidget {
       appBar: AppBar(
 
         title: Text('My Profile',style: GoogleFonts.kalam(
-            fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white),),
+            fontWeight: FontWeight.bold,fontSize: 22.sp, color: Colors.white),),
         backgroundColor: Color(0XFF2f9494),
 
         centerTitle: true,
@@ -54,7 +57,7 @@ class UserProfile extends StatelessWidget {
 
     height: MediaQuery.of(context).size.height*0.21,
     decoration: BoxDecoration(
-    image:DecorationImage(fit: BoxFit.contain,image: AssetImage('assets/images/salwa1.jpeg',)),
+    image:DecorationImage(fit: BoxFit.contain,image: AssetImage('assets/images/KHAN.jpeg',)),
     color: Colors. white,
     shape: BoxShape.circle,
     border: Border.all(color: Colors.black),
@@ -135,7 +138,7 @@ class UserProfile extends StatelessWidget {
                           BorderSide(width: 2, color: Colors.green),
                         ),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
+                          borderRadius: BorderRadius.circular(2.h),
                         ),
                         suffixIcon: Icon(Icons.edit),
                         prefixIcon: Icon(
@@ -220,36 +223,39 @@ class UserProfile extends StatelessWidget {
         Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 50),
-            child: InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (_)=> BookingScreen()));
-              },
-              child: Container(
-                  width: 200,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xff7D7D7D),
-                        spreadRadius: -1,
-                        blurRadius: 7,
-                        offset: Offset(0, 10),
-                      )
-                    ],
-                    borderRadius: BorderRadius.circular(30),
-                    color: Color(0XFF2f9494),
-                  ),
-                  child: Center(
-                      child: Text(
-                        "Save",
-                        style: TextStyle(
-                            fontFamily: "Bebas",
-                            fontSize: 25,
-                            color: Colors.white),
-                      ))),
+
+              child: InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => ManagerProfile()));
+                },
+                child: Container(
+                   height: MediaQuery.of(context).size.height*0.08,
+                    width: MediaQuery.of(context).size.width*0.4,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xff7D7D7D),
+                          spreadRadius: -1,
+                          blurRadius: 7,
+                          offset: Offset(0, 10),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(30),
+                      color: Color(0XFF2f9494),
+                    ),
+                    child: Center(
+                        child: Text(
+                          "Save",
+                          style: GoogleFonts.kalam(
+                              //fontFamily: "Bebas",
+                              fontSize: 22.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ))),
+              ),
             ),
           ),
-        ),
+
       ],
           ),
     ],

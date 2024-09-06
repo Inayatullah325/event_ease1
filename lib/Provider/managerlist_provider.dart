@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class favprovider with ChangeNotifier{
-  List<Map<dynamic,dynamic>> _Managers =[
+  List<Map<String,dynamic>> _Managers =[
     {
       'image': "assets/images/salwa.jpeg",
       'title': 'Inayat Ullah',
@@ -59,19 +59,17 @@ class favprovider with ChangeNotifier{
 
 
   ];
-  List<Map<dynamic,dynamic>> get Managers=> _Managers;
+  List<Map<String,dynamic>> get Managers=> _Managers;
 
-List<dynamic> _favorite = [];
-List<dynamic> get favorite => _favorite;
+  List<Map<String,dynamic>> _favorite = [];
+  List<Map<String,dynamic>> get favorite => _favorite;
 
- void additem (int value){
-   _favorite.add(value);
-
+ void additem (Map<String,dynamic> item){
+   _favorite.add(item);
    notifyListeners();
  }
- void removeitem (int value){
-   _favorite.remove(value);
-
-  notifyListeners();
+  void removeitem (Map<String,dynamic> item){
+    _favorite.remove(item);
+    notifyListeners();
+  }
  }
-}
