@@ -355,15 +355,26 @@ class _BookingScreenState extends State<BookingScreen> {
         Column(
           children: [
             Center(
-              child: Container(
-                height: MediaQuery.of(context).size.height*0.07,
-                width: MediaQuery.of(context).size.width*0.4,
-                decoration: BoxDecoration(
-                  color: Color(0XFF2f9494),
-                  borderRadius: BorderRadius.circular(20)
+              child: InkWell(
+                onTap: (){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Thank You'),
+                      duration: Duration( seconds: 3),
+                      )
+
+
+                  );
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height*0.07,
+                  width: MediaQuery.of(context).size.width*0.4,
+                  decoration: BoxDecoration(
+                    color: Color(0XFF2f9494),
+                    borderRadius: BorderRadius.circular(20)
+                  ),
+                  child: Center(child: Text('Book Now',style: GoogleFonts.kalam(fontSize: 20.sp,
+                      fontWeight: FontWeight.bold,color: Colors.white),)),
                 ),
-                child: Center(child: Text('Book Now',style: GoogleFonts.kalam(fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,color: Colors.white),)),
               ),
             )
           ],

@@ -70,22 +70,28 @@ class _DashBoardState extends State<DashBoard> {
               fontWeight: FontWeight.bold,fontSize: 25,) ),
           ),
            Expanded(
-             child: InkWell(
-               onTap: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => managerdetails()));
-               },
+             child: GridView.builder(
+              itemCount: Events.length,
+              gridDelegate : SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 2/2,
+              ),
+              itemBuilder: (context,  index){
 
-               child: GridView.builder(
-                itemCount: Events.length,
-                gridDelegate : SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 2/2,
-                ),
-                itemBuilder: (context, int index){
+                return InkWell(
+                  onTap: (){
+                    var instacne;
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => managerdetails(
+                      category: Events[index]['title'],
+                      mylist: instacne.listname,
+                      index: index,
 
-                  return Container(
+
+                    )));
+                  },
+                  child: Container(
                    height: MediaQuery.of(context).size.height*0.3,
                     width: MediaQuery.of(context).size.width*0.2,
                     decoration: BoxDecoration(
@@ -146,9 +152,9 @@ class _DashBoardState extends State<DashBoard> {
                         ],
                       ),
                     ),
-                  );
-                },
-               ),
+                  ),
+                );
+              },
              ),
            ),
         ],

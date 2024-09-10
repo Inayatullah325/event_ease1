@@ -9,13 +9,29 @@ import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class managerdetails extends StatefulWidget {
-  const managerdetails({super.key});
+  String  category;
+  int index;
+  List<Map<String, List<Map<String, dynamic>>>> mylist;
+
+
+
+
+    managerdetails({super.key,
+      required this.index,
+  required this.category,
+      required this.mylist,
+    });
 
   @override
   State<managerdetails> createState() => _managerdetailsState();
 }
 
 class _managerdetailsState extends State<managerdetails> {
+  late List<Map<String,dynamic>> list;
+
+
+
+
   List<Color> colors = [
     Color(0xffe5e7e9),
     Color(0xffe5e7e9),
@@ -31,6 +47,16 @@ class _managerdetailsState extends State<managerdetails> {
 
   TextEditingController searchController = TextEditingController();
   String searchQuery = '';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    list = widget.AllCategoryManager[widget.index][widget.title]!;
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     final obj_favprovider = Provider.of<favprovider>(context);

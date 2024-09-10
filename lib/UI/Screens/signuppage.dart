@@ -211,14 +211,14 @@ class _signupState extends State<signup> {
                                     });
                               }).then((value) {
 
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx) => DashBoard()));
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx) => loginpage()));
                               });
 
                             } catch (e) {
                               print(e);
                             }
                             Navigator.push(context,
-                               MaterialPageRoute(builder: (_) => loginpage()));
+                            MaterialPageRoute(builder: (_) => loginpage()));
                           },
                           child: Container(
                               width: 200,
