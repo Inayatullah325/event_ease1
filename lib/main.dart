@@ -10,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'Provider/HomeScreen_provider.dart';
 import 'UI/Screens/BookingScreen.dart';
+import 'UI/Screens/ManagerNavigationBar.dart';
 import 'UI/Screens/Manager_profile.dart';
 import 'UI/Screens/UserProfile.dart';
 import 'UI/Screens/login_screen.dart';
@@ -40,6 +42,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
       ChangeNotifierProvider(create: (_) => favprovider()),
+        ChangeNotifierProvider(create: (_) => event_categoroy()),
     ],
     child: Builder(
         builder: (BuildContext context){

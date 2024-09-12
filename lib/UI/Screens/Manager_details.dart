@@ -52,19 +52,50 @@ class _managerdetailsState extends State<managerdetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    list = widget.AllCategoryManager[widget.index][widget.title]!;
+    // if (widget.index >= 0 && widget.index < widget.mylist.length) {
+    //   if (widget.mylist[widget.index].containsKey(widget.category)) {
+    //     list = widget.mylist[widget.index][widget.category] ?? [];
+    //
+    //   }else{
+    //   list = [];
+    //   }
+    // }else{
+    //
+    //   list =[];
+    // }
+    if (widget.index >= 0 && widget.index < widget.mylist.length) {
+      list = widget.mylist[widget.index][widget.category] ?? [];
+    } else {
+      list = [];
+    }
+
+
+
+
+
   }
 
 
 
   @override
   Widget build(BuildContext context) {
-    final obj_favprovider = Provider.of<favprovider>(context);
 
-    List<Map<dynamic, dynamic>> filteredManagers = obj_favprovider.Managers.where((manager) {
+    final obj_favprovider = Provider.of<favprovider>(context);
+   // print('Managers in provider: ${obj_favprovider.Managers.length}');
+
+    List<Map<dynamic, dynamic>> filteredManagers = searchQuery.isEmpty
+        ? obj_favprovider.Managers
+        : obj_favprovider.Managers.where((manager) {
       return manager['title'].toLowerCase().contains(searchQuery.toLowerCase()) ||
           manager['address'].toLowerCase().contains(searchQuery.toLowerCase());
     }).toList();
+
+
+
+    // List<Map<dynamic, dynamic>> filteredManagers = obj_favprovider.Managers.where((manager) {
+    //   return manager['title'].toLowerCase().contains(searchQuery.toLowerCase()) ||
+    //       manager['address'].toLowerCase().contains(searchQuery.toLowerCase());
+    // }).toList();
 
     return Scaffold(
         backgroundColor: Color(0xFFF5FCFC),
@@ -104,7 +135,10 @@ class _managerdetailsState extends State<managerdetails> {
               ),
 
               Expanded(
-                child: ListView.builder(
+                child:
+                // list.isEmpty
+                //     ? Center(child: Text("No managers found")):
+                ListView.builder(
                     itemCount: obj_favprovider.Managers.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Card(
@@ -119,7 +153,7 @@ class _managerdetailsState extends State<managerdetails> {
                                               .toString(),
                                           image: obj_favprovider.Managers[index]['image']
                                               .toString(),
-                                          address: obj_favprovider.Managers[index]
+                                          address:obj_favprovider.Managers[index]
                                               ['address'],
                                         )));
                           },

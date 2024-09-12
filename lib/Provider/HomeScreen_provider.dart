@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class evetn_categoroy with ChangeNotifier {
+class event_categoroy with ChangeNotifier {
   List<Map<String, List<Map<String, dynamic>>>> AllCategoryManager = [
     {
       "marrige": [

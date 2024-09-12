@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../Provider/HomeScreen_provider.dart';
 import 'Manager_details.dart';
 
 class DashBoard extends StatefulWidget {
@@ -15,6 +17,7 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
+    final instance_homescreen=Provider.of<event_categoroy>(context);
     List<Map<String, dynamic>> Events =[
       {
         'image': "assets/images/Wedding.jpg",
@@ -82,10 +85,9 @@ class _DashBoardState extends State<DashBoard> {
 
                 return InkWell(
                   onTap: (){
-                    var instacne;
                     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => managerdetails(
-                      category: Events[index]['title'],
-                      mylist: instacne.listname,
+                      category: Events[index]['name'],
+                      mylist: instance_homescreen.AllCategoryManager,
                       index: index,
 
 

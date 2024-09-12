@@ -8,25 +8,25 @@ import 'Manager_details.dart';
 import 'UserProfile.dart';
 
 
-class navigationbuttombarr extends StatefulWidget {
-  const navigationbuttombarr({super.key});
+class ManagerNavigationBar extends StatefulWidget {
+  const ManagerNavigationBar({super.key});
 
   @override
-  State<navigationbuttombarr> createState() => _navigationbuttombarrState();
+  State<ManagerNavigationBar> createState() => _ManagerNavigationBarState();
 }
 
-class _navigationbuttombarrState extends State<navigationbuttombarr> {
-  
+class _ManagerNavigationBarState extends State<ManagerNavigationBar> {
+
   int selectedvalue = 0;
   List<Widget> screens=[
 
     DashBoard(),
-    //managerdetails(index: 1, category: 'event_categoroy', mylist: []),
-    managerdetails(index: 1, category: " abc", mylist: []),
+    Text('AMAN'),
+
     FavoriteScreen (),
     UserProfile ()
-    
-    
+
+
   ];
   List<TabItem> items=[
     TabItem (
@@ -59,7 +59,7 @@ class _navigationbuttombarrState extends State<navigationbuttombarr> {
             selectedvalue=index;
           });
         },
-          items: items,
+        items: items,
         backgroundColor: Color(0XFF2f9494),
         color: Colors.white,
         colorSelected: Colors.white,
@@ -68,14 +68,14 @@ class _navigationbuttombarrState extends State<navigationbuttombarr> {
         isAnimated: true,
 
         chipStyle: ChipStyle(
-          background: Color(0XFF2f9494),
-          notchSmoothness: NotchSmoothness.sharpEdge
+            background: Color(0XFF2f9494),
+            notchSmoothness: NotchSmoothness.sharpEdge
         ),
       ),
       body: Center(
         child: screens[selectedvalue],
       ),
-      
+
     );
   }
 }
