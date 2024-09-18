@@ -3,29 +3,29 @@ import 'package:flutter/cupertino.dart';
 class event_categoroy with ChangeNotifier {
   List<Map<String, List<Map<String, dynamic>>>> AllCategoryManager = [
     {
-      "marrige": [
+      "Marriage": [
         {
-          'image': "assets/images/KHAN.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Rafi Ullah',
-          'address': 'bajawr khas'
+          'address': 'bajawr khas',
         },
         {
-          'image': "assets/images/KHAN.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Sultan',
           'address': 'Sharif Abad Mardan '
         },
         {
-          'image': "assets/images/KHAN.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Sana Ullah',
           'address': 'Nager Fort Drosh '
         },
         {
-          'image': "assets/images/KHAN.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Ali Khan',
           'address': 'chamkani peshawer '
         },
         {
-          'image': "assets/images/KHAN.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Inam Ullah',
           'address': 'Ashret near Lawary Tunnal ',
         },
@@ -34,7 +34,7 @@ class event_categoroy with ChangeNotifier {
     {
       "Engagement": [
         {
-          'image': "assets/images/inayat.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Asif Ullah',
           'address': 'dargai malakand'
         },
@@ -44,17 +44,17 @@ class event_categoroy with ChangeNotifier {
           'address': 'Khowazakhela Swat '
         },
         {
-          'image': "assets/images/inayat.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Aman taj',
           'address': ' Drosh shahn'
         },
         {
-          'image': "assets/images/inayat.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Ali Khan',
           'address': 'arbab road peshawer '
         },
         {
-          'image': "assets/images/inayat.jpeg"
+          'image': "assets/images/salwa.jpeg"
               "",
           'title': 'Zabi Ullah',
           'address': 'Boni Upper chitral',
@@ -62,38 +62,38 @@ class event_categoroy with ChangeNotifier {
       ],
     },
     {
-      "birthday": [
+      "Birthday": [
         {
-          'image': "assets/images/1 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Akhtar Amin',
           'address': 'Shams Abad Drosh'
         },
         {
-          'image': "assets/images/1 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Uzair Raja',
           'address': 'Porana Sbzi Mandi Chitral '
         },
         {
-          'image': "assets/images/1 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Mansoor Alam',
           'address': 'Denin Gahtak Lower Chitral'
         },
         {
-          'image': "assets/images/1 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Ishfaq Ahmad',
           'address': 'Wari Dir Upper'
         },
         {
-          'image': "assets/images/1 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Basit Ali',
           'address': 'Batkhela City',
         },
       ],
     },
     {
-      'Aniversary': [
+      'Anniversary': [
         {
-          'image': "assets/images/2 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Sajjad Ahmad',
           'address': 'bajawr khas'
         },
@@ -103,26 +103,26 @@ class event_categoroy with ChangeNotifier {
           'address': 'Sharif Abad Mardan '
         },
         {
-          'image': "assets/images/2 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Arif Ullah',
           'address': 'Charsada'
         },
         {
-          'image': "assets/images/2 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Awais Sammy Khan',
           'address': 'Shawi adda Sabi'
         },
         {
-          'image': "assets/images/2 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Inam Ullah',
           'address': 'lahore',
         },
       ],
     },
     {
-      "Get-Togathers": [
+      "Get-Togethers": [
         {
-          'image': "assets/images/3 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'jamal khan',
           'address': 'Univercity Town Peshawer'
         },
@@ -132,46 +132,46 @@ class event_categoroy with ChangeNotifier {
           'address': 'College Chok Mardan'
         },
         {
-          'image': "assets/images/3 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Sajjid iqbal',
           'address': 'Hayatabad Peshawer '
         },
         {
-          'image': "assets/images/3 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Muhammad Qasim',
           'address': 'Near Abasin University peshawer '
         },
         {
-          'image': "assets/images/3 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Adnan Aziz',
           'address': 'I8 Islamabad',
         },
       ],
     },
     {
-      "Gradution Parties": [
+      "Graduation Parties": [
         {
-          'image': "assets/images/4 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Amir Khan',
           'address': 'Board Bazar Peshawer'
         },
         {
-          'image': "assets/images/4 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Nazif Khan',
           'address': 'University Town Near Chief Girl'
         },
         {
-          'image': "assets/images/4 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Rahman Ullah',
           'address': 'Abdara Road Near Sheraz Hotel '
         },
         {
-          'image': "assets/images/4 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Muhammad Raqqeb',
           'address': 'Hayatabad phase 5 peshawer '
         },
         {
-          'image': "assets/images/4 pic.jpeg",
+          'image': "assets/images/salwa.jpeg",
           'title': 'Muhammad Haris Khan ',
           'address': 'Near Bacha Khan Unuversity Charsada',
         },

@@ -1,3 +1,4 @@
+import 'package:event_ease/Provider/dashboard_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,7 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../Provider/HomeScreen_provider.dart';
+
+import 'CategoryOfManagers.dart';
 import 'Manager_details.dart';
+import 'PracticeClass.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
@@ -18,42 +22,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     final instance_homescreen=Provider.of<event_categoroy>(context);
-    List<Map<String, dynamic>> Events =[
-      {
-        'image': "assets/images/Wedding.jpg",
-        'name': 'Marriage',
-
-      },
-      {
-        'image': "assets/images/engagement.webp",
-        'name': 'Engagement',
-
-
-      },
-      {
-        'image': "assets/images/Birthday.jfif",
-        'name': 'Birthday',
-
-      },
-      {
-        'image': "assets/images/anniversary2.png",
-        'name': 'Anniversary',
-
-
-      },
-      {
-        'image': "assets/images/Get-Togethers.jfif",
-        'name': 'Get-Togethers',
-
-
-      },
-      {
-        'image': "assets/images/graduation.jfif",
-        'name': 'Graduation Parties',
-
-
-      },
-    ];
+    final instance_dashboard=Provider.of<class_dashboard_provider>(context);
 
     return Scaffold(
 
@@ -74,7 +43,7 @@ class _DashBoardState extends State<DashBoard> {
           ),
            Expanded(
              child: GridView.builder(
-              itemCount: Events.length,
+              itemCount: instance_dashboard.Events.length,
               gridDelegate : SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 10,
@@ -85,8 +54,8 @@ class _DashBoardState extends State<DashBoard> {
 
                 return InkWell(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => managerdetails(
-                      category: Events[index]['name'],
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => CategoryOfManager(
+                      category: instance_dashboard.Events[index]['name'],
                       mylist: instance_homescreen.AllCategoryManager,
                       index: index,
 
@@ -112,16 +81,16 @@ class _DashBoardState extends State<DashBoard> {
                         children: [
                           Container(
                             height: MediaQuery.of(context).size.height*0.16,
-                           // height: 123,
+
                             decoration: BoxDecoration(
-                              image: DecorationImage(image: AssetImage(Events[index]['image']),
+                              image: DecorationImage(image: AssetImage(instance_dashboard.Events[index]['image']),
                                   fit: BoxFit.cover),
                             borderRadius: BorderRadius.circular(20),
                             ),
 
                           ),
-                         // Image.asset(Events[index]['image'],height: 120,width: 210,),
-                          Text(Events[index]['name'], style: GoogleFonts.kalam(fontSize: 18,
+
+                          Text(instance_dashboard.Events[index]['name'], style: GoogleFonts.kalam(fontSize: 18,
                               fontWeight: FontWeight.bold),),
 
                           Row(
@@ -130,11 +99,10 @@ class _DashBoardState extends State<DashBoard> {
                               Center(
                                 child: Center(
                                   child: Container(
-                                    height: MediaQuery.of(context).size.height*0.021,
+                                    height: MediaQuery.of(context).size.height*0.029,
                                     width: MediaQuery.of(context).size.width*0.46,
 
-                                    // height: 20,
-                                    // width: 169,
+
                                     decoration: BoxDecoration(
                                         color: Color(0XFF2f9494),
                                         borderRadius: BorderRadius.only(

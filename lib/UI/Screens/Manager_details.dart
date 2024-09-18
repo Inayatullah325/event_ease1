@@ -9,17 +9,8 @@ import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class managerdetails extends StatefulWidget {
-  String  category;
-  int index;
-  List<Map<String, List<Map<String, dynamic>>>> mylist;
+  managerdetails({super.key,
 
-
-
-
-    managerdetails({super.key,
-      required this.index,
-  required this.category,
-      required this.mylist,
     });
 
   @override
@@ -28,10 +19,6 @@ class managerdetails extends StatefulWidget {
 
 class _managerdetailsState extends State<managerdetails> {
   late List<Map<String,dynamic>> list;
-
-
-
-
   List<Color> colors = [
     Color(0xffe5e7e9),
     Color(0xffe5e7e9),
@@ -49,39 +36,10 @@ class _managerdetailsState extends State<managerdetails> {
   String searchQuery = '';
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    // if (widget.index >= 0 && widget.index < widget.mylist.length) {
-    //   if (widget.mylist[widget.index].containsKey(widget.category)) {
-    //     list = widget.mylist[widget.index][widget.category] ?? [];
-    //
-    //   }else{
-    //   list = [];
-    //   }
-    // }else{
-    //
-    //   list =[];
-    // }
-    if (widget.index >= 0 && widget.index < widget.mylist.length) {
-      list = widget.mylist[widget.index][widget.category] ?? [];
-    } else {
-      list = [];
-    }
-
-
-
-
-
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
 
     final obj_favprovider = Provider.of<favprovider>(context);
-   // print('Managers in provider: ${obj_favprovider.Managers.length}');
 
     List<Map<dynamic, dynamic>> filteredManagers = searchQuery.isEmpty
         ? obj_favprovider.Managers
@@ -89,14 +47,6 @@ class _managerdetailsState extends State<managerdetails> {
       return manager['title'].toLowerCase().contains(searchQuery.toLowerCase()) ||
           manager['address'].toLowerCase().contains(searchQuery.toLowerCase());
     }).toList();
-
-
-
-    // List<Map<dynamic, dynamic>> filteredManagers = obj_favprovider.Managers.where((manager) {
-    //   return manager['title'].toLowerCase().contains(searchQuery.toLowerCase()) ||
-    //       manager['address'].toLowerCase().contains(searchQuery.toLowerCase());
-    // }).toList();
-
     return Scaffold(
         backgroundColor: Color(0xFFF5FCFC),
         appBar: AppBar(

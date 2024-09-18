@@ -4,7 +4,7 @@ class favprovider with ChangeNotifier{
   List<Map<String,dynamic>> _Managers =[
     {
       'image': "assets/images/salwa.jpeg",
-      'title': 'Inayat Ullah',
+      'title': 'Aabid Khan',
       'address': 'Board Bazar peshawer '
     },
     {

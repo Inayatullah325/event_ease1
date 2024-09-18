@@ -21,8 +21,7 @@ class _navigationbuttombarrState extends State<navigationbuttombarr> {
   List<Widget> screens=[
 
     DashBoard(),
-    //managerdetails(index: 1, category: 'event_categoroy', mylist: []),
-    managerdetails(index: 1, category: " abc", mylist: []),
+    managerdetails(),
     FavoriteScreen (),
     UserProfile ()
     

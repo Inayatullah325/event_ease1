@@ -5,8 +5,20 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class ManagerProfile extends StatelessWidget {
+class ManagerProfile extends StatefulWidget {
   const ManagerProfile({super.key});
+
+  @override
+  State<ManagerProfile> createState() => _ManagerProfileState();
+}
+
+class _ManagerProfileState extends State<ManagerProfile> {
+  bool isselected = false;
+  bool isselected1 = false;
+  bool isselected2 = false;
+  bool isselected3 = false;
+  bool isselected4 = false;
+  bool isselected5 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -275,6 +287,125 @@ class ManagerProfile extends StatelessWidget {
                             labelText: 'Description',
                             labelStyle:
                             TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(child: Text("Which Services do you offer? ",
+                        style: GoogleFonts.kalam(fontSize: 20.sp,fontWeight: FontWeight.bold),)),
+                    ),
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: Row(
+                       children: [
+                         Row(
+                           children: [
+                             Checkbox(
+
+                                 activeColor: Colors.black,
+                                 checkColor: Colors.white,
+                                 value:isselected, onChanged: (value){
+                               setState(() {
+                                 isselected=value!;
+                               });
+                             }),
+                             Text('Marrige'),
+                           ],
+
+                         ),
+                         Row(
+                           children: [
+                             Checkbox(
+
+                                 activeColor: Colors.black,
+                                 checkColor: Colors.white,
+                                 value:isselected1, onChanged: (value){
+                               setState(() {
+                                 isselected1=value!;
+                               });
+                             }),
+                             Text('Engagement'),
+                           ],
+
+                         ),
+
+                       ],
+                     ),
+                   ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Row(
+                            children: [
+                              Checkbox(
+
+                                  activeColor: Colors.black,
+                                  checkColor: Colors.white,
+                                  value:isselected2, onChanged: (value){
+                                setState(() {
+                                  isselected2=value!;
+                                });
+                              }),
+                              Text('Birthday'),
+                            ],
+
+                          ),
+                          Row(
+                            children: [
+                              Checkbox(
+
+                                  activeColor: Colors.black,
+                                  checkColor: Colors.white,
+                                  value:isselected3, onChanged: (value){
+                                setState(() {
+                                  isselected3=value!;
+                                });
+                              }),
+                              Text('Anniversary'),
+                            ],
+
+                          ),
+
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Row(
+                            children: [
+                              Checkbox(
+
+                                  activeColor: Colors.black,
+                                  checkColor: Colors.white,
+                                  value:isselected4, onChanged: (value){
+                                setState(() {
+                                  isselected4=value!;
+                                });
+                              }),
+                              Text('Get-Togethers'),
+                            ],
+
+                          ),
+                          Row(
+                            children: [
+                              Checkbox(
+
+                                  activeColor: Colors.black,
+                                  checkColor: Colors.white,
+                                  value:isselected5, onChanged: (value){
+                                setState(() {
+                                  isselected5=value!;
+                                });
+                              }),
+                              Text('Greduation parties'),
+                            ],
+
+                          ),
+
+                        ],
                       ),
                     ),
                   ],

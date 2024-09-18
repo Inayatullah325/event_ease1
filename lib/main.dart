@@ -1,5 +1,6 @@
 
 
+import 'package:event_ease/Provider/dashboard_provider.dart';
 import 'package:event_ease/Provider/managerlist_provider.dart';
 import 'package:event_ease/UI/Screens/Dashboard.dart';
 import 'package:event_ease/UI/Screens/Manager_details.dart';
@@ -12,7 +13,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'Provider/HomeScreen_provider.dart';
 import 'UI/Screens/BookingScreen.dart';
-import 'UI/Screens/ManagerNavigationBar.dart';
+import 'UI/Screens/ManagerUI/ManagerNavigationBar.dart';
 import 'UI/Screens/Manager_profile.dart';
 import 'UI/Screens/UserProfile.dart';
 import 'UI/Screens/login_screen.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
       providers: [
       ChangeNotifierProvider(create: (_) => favprovider()),
         ChangeNotifierProvider(create: (_) => event_categoroy()),
+        ChangeNotifierProvider(create: (_) => class_dashboard_provider()),
     ],
     child: Builder(
         builder: (BuildContext context){
