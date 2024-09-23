@@ -1,6 +1,6 @@
 import 'package:event_ease/Provider/managerlist_provider.dart';
 import 'package:event_ease/UI/Screens/ManagerHistory.dart';
-import 'package:event_ease/UI/Screens/Manager_profile.dart';
+import 'package:event_ease/UI/Screens/ProfileScreen/Manager_profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -48,7 +48,7 @@ class _managerdetailsState extends State<managerdetails> {
           manager['address'].toLowerCase().contains(searchQuery.toLowerCase());
     }).toList();
     return Scaffold(
-        backgroundColor: Color(0xFFF5FCFC),
+        //backgroundColor: Color(0xFFF5FCFC),
         appBar: AppBar(
           title: Text(
             'Manager List',
@@ -86,13 +86,11 @@ class _managerdetailsState extends State<managerdetails> {
 
               Expanded(
                 child:
-                // list.isEmpty
-                //     ? Center(child: Text("No managers found")):
                 ListView.builder(
                     itemCount: obj_favprovider.Managers.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Card(
-                        color: colors[index],
+                       // color: colors[index],
                         child: InkWell(
                           onTap: () {
                             Navigator.push(

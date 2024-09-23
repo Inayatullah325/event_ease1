@@ -1,4 +1,4 @@
-import 'package:event_ease/UI/Screens/login_screen.dart';
+import 'package:event_ease/UI/Screens/LoginSignupScreens/login_screen.dart';
 import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 // import 'package:get/get_core/src/get_main.dart';

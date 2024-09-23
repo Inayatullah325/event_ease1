@@ -1,12 +1,12 @@
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
 import 'package:event_ease/UI/Screens/Dashboard.dart';
-import 'package:event_ease/UI/Screens/Manager_profile.dart';
+import 'package:event_ease/UI/Screens/ProfileScreen/Manager_profile.dart';
 import 'package:flutter/material.dart';
 
 import '../FavoriteScreen.dart';
 import '../Manager_details.dart';
-import '../UserProfile.dart';
+import '../ProfileScreen/UserProfile.dart';
 
 
 class ManagerNavigationBar extends StatefulWidget {

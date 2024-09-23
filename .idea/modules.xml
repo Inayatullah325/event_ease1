@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/event_ease.iml" filepath="$PROJECT_DIR$/.idea/event_ease.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/event_ease_android.iml" filepath="$PROJECT_DIR$/android/event_ease_android.iml" />
     </modules>
   </component>
 </project>

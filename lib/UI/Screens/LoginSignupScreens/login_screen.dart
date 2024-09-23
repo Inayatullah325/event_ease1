@@ -1,7 +1,8 @@
+import 'package:event_ease/UI/RoleBase.dart';
 import 'package:event_ease/UI/Screens/Dashboard.dart';
-import 'package:event_ease/UI/Screens/ForgotPassword.dart';
+import 'package:event_ease/UI/Screens/LoginSignupScreens/ForgotPassword.dart';
 import 'package:event_ease/UI/Screens/navigationbuttombarr.dart';
-import 'package:event_ease/UI/Screens/signuppage.dart';
+import 'package:event_ease/UI/Screens/LoginSignupScreens/signuppage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +120,7 @@ class _eventeaseState extends State<loginpage> {
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
                             controller: PasswordController,
-                            //keyboardType: TextInputType.number,
+                            obscureText: true,
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(11),
@@ -169,7 +170,8 @@ class _eventeaseState extends State<loginpage> {
 
                                 .user;
                             if (FirebaseUser != null){
-                              Navigator.push(context, MaterialPageRoute(builder: (_)=> navigationbuttombarr()));
+                              AuthCheck().checkUserRoleAndNavigate(context);
+                            //  Navigator.push(context, MaterialPageRoute(builder: (_)=> navigationbuttombarr()));
 
                             }
                             else{
@@ -178,7 +180,7 @@ class _eventeaseState extends State<loginpage> {
                           }on FirebaseAuthException catch(e){
                             print(e);
                           }
-                          Navigator.push(context, MaterialPageRoute(builder: (_)=> navigationbuttombarr()));
+                        //  Navigator.push(context, MaterialPageRoute(builder: (_)=> navigationbuttombarr()));
                         },
                         child: Container(
                             width: 200,

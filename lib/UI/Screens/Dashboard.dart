@@ -8,6 +8,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../Provider/HomeScreen_provider.dart';
 
 import 'CategoryOfManagers.dart';
+import 'LoginSignupScreens/login_screen.dart';
 import 'Manager_details.dart';
 import 'PracticeClass.dart';
 
@@ -26,13 +27,15 @@ class _DashBoardState extends State<DashBoard> {
 
     return Scaffold(
 
-      backgroundColor: Color(0xFFF5FCFC),
+      //backgroundColor: Color(0xFFF5FCFC),
 
       appBar: AppBar(
         title: Text('Event Ease ' ,style: GoogleFonts.kalam(
             fontWeight: FontWeight.bold,fontSize: 22.sp,color: Colors.white),),
         backgroundColor: Color(0XFF2f9494),
         centerTitle: true,
+
+
       ),
       body: Column(
         children: [
@@ -40,6 +43,10 @@ class _DashBoardState extends State<DashBoard> {
             padding: const EdgeInsets.all(8.0),
             child: Text("Event Types...",style: GoogleFonts.kalam(
               fontWeight: FontWeight.bold,fontSize: 25,) ),
+          ),
+          Divider(
+            thickness: 2,
+            color: Colors.black,
           ),
            Expanded(
              child: GridView.builder(

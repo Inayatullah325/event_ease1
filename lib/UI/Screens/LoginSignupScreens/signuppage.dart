@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_ease/UI/Screens/Dashboard.dart';
-import 'package:event_ease/UI/Screens/login_screen.dart';
+import 'package:event_ease/UI/Screens/LoginSignupScreens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -113,7 +113,7 @@ class _signupState extends State<signup> {
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: TextField(
-                            controller: PhoneController,
+                            controller: EmailController,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -126,7 +126,7 @@ class _signupState extends State<signup> {
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(11),
                                   borderSide:
-                                      BorderSide(width: 2, color: Colors.black),
+                                  BorderSide(width: 2, color: Colors.black),
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(11),
@@ -140,15 +140,18 @@ class _signupState extends State<signup> {
                                 hintStyle: TextStyle(color: Colors.grey),
                                 labelText: 'Contact Number',
                                 labelStyle:
-                                    TextStyle(fontWeight: FontWeight.bold)),
+                                TextStyle(fontWeight: FontWeight.bold)),
                           ),
+
+
+
                         ),
                         //Password
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
                             controller: PasswordController,
-                            //keyboardType: TextInputType.number,
+                            obscureText: true,
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(11),
@@ -203,11 +206,12 @@ class _signupState extends State<signup> {
                                     {
                                       'username':NameController.text.toString().trim(),
                                       'useremail': EmailController.text.toString().trim(),
-                                      'phoeno' : PhoneController.text.toString().trim(),
+                                      'phone' : PhoneController.text.toString().trim(),
                                       'userpassword' : PasswordController.text.toString().trim(),
                                       'image' : '',
                                       'created At' : DateTime.now(),
                                       'user id' : currentuser!.uid,
+                                      'role' : 'user',
                                     });
                               }).then((value) {
 
@@ -217,8 +221,8 @@ class _signupState extends State<signup> {
                             } catch (e) {
                               print(e);
                             }
-                            Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => loginpage()));
+                            // Navigator.push(context,
+                            // MaterialPageRoute(builder: (_) => loginpage()));
                           },
                           child: Container(
                               width: 200,

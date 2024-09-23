@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'FavoriteScreen.dart';
 import 'Manager_details.dart';
-import 'UserProfile.dart';
+import 'ProfileScreen/UserProfile.dart';
 
 
 class navigationbuttombarr extends StatefulWidget {

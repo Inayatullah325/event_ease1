@@ -1,3 +1,4 @@
+import 'package:event_ease/UI/Screens/LoginSignupScreens/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -29,8 +30,20 @@ class _ManagerProfileState extends State<ManagerProfile> {
         title: Text('Manager Profile',style: GoogleFonts.kalam(
             fontWeight: FontWeight.bold,fontSize: 22.sp,color: Colors.white),),
         backgroundColor: Color(0XFF2f9494),
-
         centerTitle: true,
+        actions: [
+            Padding(
+              padding: const EdgeInsets.all(17.0),
+              child: InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => loginpage()));
+                },
+                  
+                  child: Icon(Icons.door_back_door_outlined,color: Colors.white,)),
+            ),
+
+        ],
+
 
       ),
 
