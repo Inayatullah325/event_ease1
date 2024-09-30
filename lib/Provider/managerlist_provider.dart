@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class favprovider extends ChangeNotifier {
+class favprovider with ChangeNotifier {
   List<Map<String, dynamic>> Managers = [];
   List<Map<String, dynamic>> favorite = [];
 
@@ -9,20 +9,17 @@ class favprovider extends ChangeNotifier {
     fetchManagers(); // Fetch managers when provider is created
   }
 
-  Future<void> fetchManagers() async {
-    try {
-      QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('ManagerProfile').get();
+  void fetchManagers() {
+    FirebaseFirestore.instance.collection('User').snapshots().listen((snapshot) {
       Managers = snapshot.docs.map((doc) {
         return {
-          'title': doc['name'],
+          'name': doc['name'],
           'image': doc['imageUrl'],
           'address': doc['address'],
         };
       }).toList();
       notifyListeners(); // Notify listeners to update UI
-    } catch (e) {
-      print('Error fetching managers: $e');
-    }
+    });
   }
 
   void additem(Map<String, dynamic> manager) {

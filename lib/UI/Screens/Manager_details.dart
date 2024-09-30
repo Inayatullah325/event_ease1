@@ -1,139 +1,126 @@
- import 'package:event_ease/Provider/managerlist_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:event_ease/Provider/managerlist_provider.dart';
 import 'package:event_ease/UI/Screens/ManagerHistory.dart';
-import 'package:event_ease/UI/Screens/ProfileScreen/Manager_profile.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-class managerdetails extends StatefulWidget {
-  managerdetails({super.key,
 
-  });
+class ManagerDetails extends StatefulWidget {
+  ManagerDetails({super.key});
 
   @override
-  State<managerdetails> createState() => _managerdetailsState();
+  State<ManagerDetails> createState() => _ManagerDetailsState();
 }
 
-class _managerdetailsState extends State<managerdetails> {
-  late List<Map<String,dynamic>> list;
-          List<Color> colors = [
-          Color(0xffe5e7e9),
-          Color(0xffe5e7e9),
-          Color(0xffe5e7e9),
-          Color(0xffe5e7e9),
-          Color(0xffe5e7e9),
-          Color(0xffe5e7e9),
-          Color(0xffe5e7e9),
-          Color(0xffe5e7e9),
-          Color(0xffe5e7e9),
-          Color(0xffe5e7e9)
-          ];
-          TextEditingController searchController = TextEditingController();
-          String searchQuery = '';
+class _ManagerDetailsState extends State<ManagerDetails> {
+  late List<Map<String, dynamic>> list;
+  List<Color> colors = [
+    Color(0xffe5e7e9),
+    Color(0xffe5e7e9),
+    Color(0xffe5e7e9),
+    Color(0xffe5e7e9),
+    Color(0xffe5e7e9),
+    Color(0xffe5e7e9),
+    Color(0xffe5e7e9),
+    Color(0xffe5e7e9),
+    Color(0xffe5e7e9),
+    Color(0xffe5e7e9),
+  ];
 
-          @override
-          @override
-          Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
+    final obj_favprovider = Provider.of<favprovider>(context);
 
-          final obj_favprovider = Provider.of<favprovider>(context);
-
-          List<Map<dynamic, dynamic>> filteredManagers = searchQuery.isEmpty
-          ? obj_favprovider.Managers
-              : obj_favprovider.Managers.where((manager) {
-          return manager['title'].toLowerCase().contains(searchQuery.toLowerCase()) ||
-          manager['address'].toLowerCase().contains(searchQuery.toLowerCase());
-          }).toList();
-          return Scaffold(
-          //backgroundColor: Color(0xFFF5FCFC),
-          appBar: AppBar(
-          title: Text(
+    return Scaffold(
+      backgroundColor: Color(0xFFF5FCFC),
+      appBar: AppBar(
+        title: Text(
           'Manager List',
           style: GoogleFonts.kalam(
-          fontSize: 22.sp, fontWeight: FontWeight.bold, color: Colors.white),
+            fontSize: 22.sp,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
-          backgroundColor: Color(0XFF2f9494),
-          centerTitle: true,
-          ),
-          body: GestureDetector(
-          onTap: () {
-          Navigator.push(
-          context, MaterialPageRoute(builder: (_) => ManagerProfile()));
-          },
-          child: Column(
-          children: [
-          Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-          controller: searchController,
-          decoration: InputDecoration(
-          hintText: 'Search Managers',
-          prefixIcon: Icon(Icons.search),
-          border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          ),
-          ),
-          onChanged: (value) {
-          setState(() {
-          searchQuery = value;
-          });
-          },
-          ),
-          ),
-
-          Expanded(
-          child:
-          ListView.builder(
-          itemCount: obj_favprovider.Managers.length,
-          itemBuilder: (BuildContext context, int index) {
-          return Card(
-          // color: colors[index],
-          child: InkWell(
-          onTap: () {
-          Navigator.push(
-          context,
-          MaterialPageRoute(
-          builder: (context) => ManagerHistory(
-          title: obj_favprovider.Managers[index]['title']
-              .toString(),
-          image: obj_favprovider.Managers[index]['image']
-              .toString(),
-          address:obj_favprovider.Managers[index]
-          ['address'],
-          )));
-          },
-          child: Consumer<favprovider>(builder: (context, vm, child) {
-          return ListTile(
-          leading: CircleAvatar(
-          backgroundImage:
-          NetworkImage(obj_favprovider.Managers[index]['image'].toString())),
-          title: Text(obj_favprovider.Managers[index]['title']),
-          subtitle: Text(obj_favprovider.Managers[index]['address']),
-          trailing: InkWell(
-          onTap: () {
-          vm.favorite.contains(obj_favprovider.Managers[index])
-          ? vm.removeitem(obj_favprovider.Managers[index])
-              : obj_favprovider.additem(obj_favprovider.Managers[index]);
-          },
-          child: vm.favorite.contains(obj_favprovider.Managers[index])
-          ? Icon(Icons.favorite,color: Colors.red,)
-              : Icon(
-          Icons.favorite_border_outlined,
-          ),
-          ),
-          );
-          },
-
-          ),
-          ),
-          );
-          }),
-          ),
-          ],
-          ),
-          ));
-          }
+        ),
+        backgroundColor: Color(0XFF2f9494),
+        centerTitle: true,
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection("Users").where('role',isEqualTo:"manager" ).snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
           }
 
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
 
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return Center(child: Text('No managers available'));
+          }
+
+          // Firestore data retrieval
+          return ListView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (BuildContext context, int index) {
+              var data = snapshot.data!.docs[index];
+
+              return Card(
+                color: colors[index % colors.length],
+                child: InkWell(
+                  onTap: () {
+                    // Navigate to ManagerHistory screen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ManagerHistory(
+                          title: data['name'].toString(),
+                          image: data['image'].toString(),
+                          address: data['address'].toString(),
+                        ),
+                      ),
+                    );
+                  },
+                  child: Consumer<favprovider>(
+                    builder: (context, vm, child) {
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            data['image'] != null
+                                ? data['image']
+                                : 'https://via.placeholder.com/150', // Fallback image
+                          ),
+                        ),
+                        title: Text(data['name'] ?? 'No Name'),
+                        subtitle: Text(data['address'] ?? 'No Address'),
+                        trailing: InkWell(
+                          onTap: () {
+                            if (vm.favorite.contains(data.id)) {
+                              // vm.removeitem();
+                            } else {
+                              // obj_favprovider.additem();
+                            }
+                          },
+                          child: Icon(
+                            vm.favorite.contains(data.id)
+                                ? Icons.favorite
+                                : Icons.favorite_border_outlined,
+                            color: vm.favorite.contains(data.id)
+                                ? Colors.red
+                                : null,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}

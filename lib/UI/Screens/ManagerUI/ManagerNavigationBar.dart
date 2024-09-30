@@ -9,6 +9,8 @@ import '../FavoriteScreen.dart';
 import '../Manager_details.dart';
 import '../ProfileScreen/UserProfile.dart';
 import 'ExploreScreen.dart';
+import 'OrderDetailsScreen.dart';
+import 'Orders.dart';
 
 
 class ManagerNavigationBar extends StatefulWidget {
@@ -24,8 +26,9 @@ class _ManagerNavigationBarState extends State<ManagerNavigationBar> {
   List<Widget> screens=[
 
     DashBoard(),
-    managerdetails(),
-  // Text('Manage User'),
+    //Orders(),
+    ManagerDetails(),
+   //OrderScreen(),
     ExploreScreen(),
     ManagerProfileMain(),
 

@@ -21,7 +21,7 @@ class _navigationbuttombarrState extends State<navigationbuttombarr> {
   List<Widget> screens=[
 
     DashBoard(),
-    managerdetails(),
+    ManagerDetails(),
     FavoriteScreen (),
     UserProfileMain ()
     

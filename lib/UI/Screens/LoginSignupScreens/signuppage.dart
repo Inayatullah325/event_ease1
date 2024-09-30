@@ -182,8 +182,9 @@ class _SignupPageState extends State<SignupPage> {
           'role': selectedRole,
           'userId': currentUser.uid,
           'email': emailController.text.trim(),
-          'username': nameController.text.trim(),
-          'password': passwordController.text.trim(),
+          'name': nameController.text.trim(),
+          'image': '',
+          'address': '',
           'createdAt': DateTime.now(),
 
 

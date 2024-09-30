@@ -80,8 +80,10 @@ class _CategoryOfManagerState extends State<CategoryOfManager> {
                             ManagerHistory(
                                 image:  list[index]['image'].toString(),
                                 title:  list[index]['title'].toString() ,
-                                address:  list[index]['address'].toString()
-                         ,),));
+                                address:  list[index]['address'].toString(),
+                         )
+                          ,)
+                        );
                       },
                       child: ListTile(
                         subtitle: Text(list[index]['address']),

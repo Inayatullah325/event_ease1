@@ -39,7 +39,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   return ListTile(
                     title: Text(vm.favorite[index]['title']),
                     subtitle: Text(vm.favorite[index]['address']),
-                    leading: CircleAvatar(backgroundImage: AssetImage(vm.favorite[index]['image']),),
+                    leading: CircleAvatar(backgroundImage: NetworkImage(vm.favorite[index]['image']),),
                     trailing: InkWell(onTap: (){
                       favoriteprovider.removeitem(vm.favorite[index]);
                     },child: Icon(Icons.favorite)),

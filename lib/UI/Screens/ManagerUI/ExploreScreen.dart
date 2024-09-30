@@ -23,7 +23,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
   }
 
   String? Eventdata;
+
   String? docId;
+
   bool isOpen = false;
   String Eventtypes = 'Event Types';
   List<String> typesofevents = ['Marriage', 'Engagement', 'Birthday', 'Anniversary', 'Get-Togethers',
@@ -33,6 +35,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
   TextEditingController MemberControler= TextEditingController();
   TextEditingController SpaceControler = TextEditingController();
   TextEditingController BudgetController = TextEditingController();
+
+
 
   String? imageUrl;
   XFile? file;
@@ -328,7 +332,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   onTap: () async {
                     try {
                       FirebaseFirestore.instance.collection('Eventdata').doc().set({
-                        'imageUrl': imageUrl,
+                        'image': imageUrl,
                         'eventType': Eventtypes,
                         'description': Discriptioncoltroller.text,
                         'members': MemberControler.text,

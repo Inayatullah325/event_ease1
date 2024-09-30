@@ -22,12 +22,12 @@ class _BookingScreenState extends State<BookingScreen> {
     'Graduation Parties', 'Other'
   ];
 
-  final TextEditingController guestsController = TextEditingController();
-  final TextEditingController budgetController = TextEditingController();
-  final TextEditingController dateController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController addressController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
+  TextEditingController guestsController = TextEditingController();
+  TextEditingController budgetController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   DateTime? selectedDate;
   String eventTime = 'Day';
@@ -58,7 +58,7 @@ class _BookingScreenState extends State<BookingScreen> {
     String eventDate = dateController.text.trim();
     String services = _getSelectedServices();
 
-    // Check if all the necessary fields are filled
+
     if (name.isEmpty || address.isEmpty || phone.isEmpty || guests.isEmpty
         || budget.isEmpty || eventDate.isEmpty || eventType == 'Event Types') {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -67,7 +67,7 @@ class _BookingScreenState extends State<BookingScreen> {
       return;
     }
 
-    // Save the booking details in Firestore
+
     try {
       await FirebaseFirestore.instance.collection('bookings').add({
         'name': name,

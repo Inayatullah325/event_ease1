@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_ease/UI/Screens/LoginSignupScreens/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,6 +33,7 @@ class _UserProfileState extends State<UserProfile> {
 
   File? imageFile;
   String? imageUrl;
+
 
   void _clearForm() {
     NameController.clear();
@@ -82,6 +84,7 @@ class _UserProfileState extends State<UserProfile> {
 
   @override
   Widget build(BuildContext context) {
+    User? userid=FirebaseAuth.instance.currentUser;
 
     return Scaffold(
       backgroundColor: Color(0xFFF5FCFC),
@@ -298,12 +301,11 @@ class _UserProfileState extends State<UserProfile> {
                   child: GestureDetector(
                     onTap: () async {
                       try {
-                        FirebaseFirestore.instance.collection('UserProfile').doc().set({
-                          'imageUrl': imageUrl,
+                        FirebaseFirestore.instance.collection('Users').doc(userid!.uid).update({
+                          'image': imageUrl,
                           'name': NameController.text,
                           'address': AddressController.text,
                           'phone': PhoneController.text,
-                          'password': PasswordController.text,
                           'timestamp': Timestamp.now(),
                         });
                         ScaffoldMessenger.of(context).showSnackBar(
