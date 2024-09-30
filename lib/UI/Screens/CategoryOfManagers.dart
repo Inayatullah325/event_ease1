@@ -1,4 +1,6 @@
 import 'package:event_ease/Provider/HomeScreen_provider.dart';
+import 'package:event_ease/UI/Screens/BookingScreen.dart';
+import 'package:event_ease/UI/Screens/ManagerHistory.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -72,12 +74,22 @@ class _CategoryOfManagerState extends State<CategoryOfManager> {
                 itemBuilder: (context, index) {
                   return Card(
                     color: colors[index],
-                    child:  ListTile(
-                      subtitle: Text(list[index]['address']),
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage(list[index]['image']),
+                    child:  InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=>
+                            ManagerHistory(
+                                image:  list[index]['image'].toString(),
+                                title:  list[index]['title'].toString() ,
+                                address:  list[index]['address'].toString()
+                         ,),));
+                      },
+                      child: ListTile(
+                        subtitle: Text(list[index]['address']),
+                        leading: CircleAvatar(
+                          backgroundImage: AssetImage(list[index]['image']),
+                        ),
+                        title: Text(list[index]['title']),
                       ),
-                      title: Text(list[index]['title']),
                     ),
                   );
                 },

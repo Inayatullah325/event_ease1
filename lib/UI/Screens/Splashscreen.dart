@@ -1,5 +1,6 @@
 import 'dart:async';
 
+
 import 'package:event_ease/Provider/dashboard_provider.dart';
 import 'package:event_ease/UI/RoleBase.dart';
 import 'package:event_ease/UI/Screens/LoginSignupScreens/signuppage.dart';
@@ -17,47 +18,55 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  AuthCheck authCheck = AuthCheck();
-  User? user = FirebaseAuth.instance.currentUser;
+   final AuthCheck authCheck = AuthCheck();
 
-  void initState(){
+  @override
+  void initState() {
     super.initState();
-    Timer(Duration(seconds: 2,),
-        (){
-      user != null? authCheck.checkUserRoleAndNavigate(context): authCheck.signInUser(context);
-
-      // Navigator.push(context, MaterialPageRoute(builder: (_)=>
-      //   loginpage ()));
-  });
+    Timer(const Duration(seconds: 2), () {
+      final user = FirebaseAuth.instance.currentUser;
+       if (user != null) {
+        authCheck.checkUserRoleAndNavigate(context);
+      } else
+      {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const loginpage()),
+        );
+      }
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: double.maxFinite,
-        width: double.maxFinite,
+        height: double.infinity,
+        width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
             colors: [Color(0XFF2f9494), Colors.white],
-          )
+          ),
         ),
-
-
-
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-         // crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text('Wellcome' ,style: GoogleFonts.kalam(
-                fontWeight: FontWeight.bold,fontSize: 45,color: Colors.black),),
-
-            Image.asset('assets/images/event_easebg.png')
-          ],
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                'Welcome',
+                style: GoogleFonts.kalam(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 45,
+                  color: Colors.black,
+                ),
+              ),
+              Image.asset('assets/images/event_easebg.png'),
+            ],
+          ),
         ),
       ),
-    ), );
+    );
   }
 }

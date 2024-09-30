@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'FavoriteScreen.dart';
 import 'Manager_details.dart';
-import 'ProfileScreen/UserProfile.dart';
+import 'ProfileScreen/UserProfileMain.dart';
 
 
 class navigationbuttombarr extends StatefulWidget {
@@ -23,7 +23,7 @@ class _navigationbuttombarrState extends State<navigationbuttombarr> {
     DashBoard(),
     managerdetails(),
     FavoriteScreen (),
-    UserProfile ()
+    UserProfileMain ()
     
     
   ];

@@ -1,6 +1,7 @@
 import 'package:event_ease/UI/RoleBase.dart';
 import 'package:event_ease/UI/Screens/Dashboard.dart';
 import 'package:event_ease/UI/Screens/LoginSignupScreens/ForgotPassword.dart';
+import 'package:event_ease/UI/Screens/ManagerUI/ManagerNavigationBar.dart';
 import 'package:event_ease/UI/Screens/navigationbuttombarr.dart';
 import 'package:event_ease/UI/Screens/LoginSignupScreens/signuppage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,42 +46,45 @@ class _eventeaseState extends State<loginpage> {
              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                Image.asset('assets/images/eventbg.png'),
+                Padding(
+                  padding: const EdgeInsets.all(50.0),
+                  child: Image.asset('assets/images/eventbg.png'),
+                ),
                   Container(
                     child: Column(
                       children: [
                         //Name
-                        Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: TextField(
-                            controller: NameController,
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(11),
-                                  borderSide: BorderSide(
-                                    width: 1,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(11),
-                                  borderSide:
-                                  BorderSide(width: 2, color: Colors.black),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(11),
-                                ),
-                                suffixIcon: Icon(Icons.edit),
-                                prefixIcon: Icon(
-                                  Icons.drive_file_rename_outline,
-                                  color: Colors.black,
-                                ),
-                                hintText: 'Daniel Ritchie',
-                                hintStyle: TextStyle(color: Colors.grey),
-                                labelText: 'Name',
-                                labelStyle: TextStyle(fontWeight: FontWeight.bold)),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(10),
+                        //   child: TextField(
+                        //     controller: NameController,
+                        //     decoration: InputDecoration(
+                        //         enabledBorder: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(11),
+                        //           borderSide: BorderSide(
+                        //             width: 1,
+                        //             color: Colors.black,
+                        //           ),
+                        //         ),
+                        //         focusedBorder: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(11),
+                        //           borderSide:
+                        //           BorderSide(width: 2, color: Colors.black),
+                        //         ),
+                        //         border: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(11),
+                        //         ),
+                        //         suffixIcon: Icon(Icons.edit),
+                        //         prefixIcon: Icon(
+                        //           Icons.drive_file_rename_outline,
+                        //           color: Colors.black,
+                        //         ),
+                        //         hintText: 'Daniel Ritchie',
+                        //         hintStyle: TextStyle(color: Colors.grey),
+                        //         labelText: 'Name',
+                        //         labelStyle: TextStyle(fontWeight: FontWeight.bold)),
+                        //   ),
+                        // ),
                         //Contact number
                         Padding(
                           padding: const EdgeInsets.all(10),
@@ -113,7 +117,7 @@ class _eventeaseState extends State<loginpage> {
                                 labelStyle: TextStyle(fontWeight: FontWeight.bold)),
                           ),
                         ),
-                        //Phone
+
 
                         //Password
                         Padding(
@@ -154,7 +158,7 @@ class _eventeaseState extends State<loginpage> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Center(
                     child: Padding(
@@ -170,8 +174,9 @@ class _eventeaseState extends State<loginpage> {
 
                                 .user;
                             if (FirebaseUser != null){
-                              AuthCheck().checkUserRoleAndNavigate(context);
-                            //  Navigator.push(context, MaterialPageRoute(builder: (_)=> navigationbuttombarr()));
+                             AuthCheck().checkUserRoleAndNavigate(context);
+                              //Navigator.push(context, MaterialPageRoute(builder: (_) => ManagerNavigationBar()));
+
 
                             }
                             else{
@@ -180,7 +185,7 @@ class _eventeaseState extends State<loginpage> {
                           }on FirebaseAuthException catch(e){
                             print(e);
                           }
-                        //  Navigator.push(context, MaterialPageRoute(builder: (_)=> navigationbuttombarr()));
+
                         },
                         child: Container(
                             width: 200,
@@ -210,10 +215,14 @@ class _eventeaseState extends State<loginpage> {
 
                   ),
 
-            
+
+
+
+
+
 
                   Column(
-                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(onPressed: (){
                         Navigator.push(context, MaterialPageRoute(builder: (_) => ForgotPassword()));
@@ -226,7 +235,7 @@ class _eventeaseState extends State<loginpage> {
                     children: [
                       Text("Dont have an account?"),
                       TextButton(onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => signup()));
+                        Navigator.push(context, MaterialPageRoute(builder: (_) =>  SignupPage()));
                       }, child: Text('Sin up')),
                     ],
                   ),

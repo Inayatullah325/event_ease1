@@ -1,75 +1,37 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
-class favprovider with ChangeNotifier{
-  List<Map<String,dynamic>> _Managers =[
-    {
-      'image': "assets/images/salwa.jpeg",
-      'title': 'Aabid Khan',
-      'address': 'Board Bazar peshawer '
-    },
-    {
-      'image': "assets/images/salwa.jpeg",
-      'title': 'Malak Roman ',
-      'address': ' Charsada chok mardan'
-    },
-    {
-      'image': "assets/images/salwa.jpeg",
-      'title': 'Asfan Wadood',
-      'address': 'Temargara Dir Lower',
+class favprovider extends ChangeNotifier {
+  List<Map<String, dynamic>> Managers = [];
+  List<Map<String, dynamic>> favorite = [];
 
-    },
+  favprovider() {
+    fetchManagers(); // Fetch managers when provider is created
+  }
 
-    {
-      'image': "assets/images/salwa.jpeg",
-      'title': 'Basharat Aziz',
-      'address': ' Khas Dir Upper'
-    },
-    {
-      'image': "assets/images/salwa.jpeg",
-      'title': 'Asif Jalal',
-      'address': 'Swat Matta'
-    },
-    {
-      'image': "assets/images/salwa.jpeg",
-      'title': 'Aftab Ahmad',
-      'address': 'Swabi Shawy Ada'
-    },
-    {
-      'image': "assets/images/salwa.jpeg",
-      'title': 'Muhammad Rafiq ',
-      'address': 'Mengora Swat'
-    },
-    {
-      'image': "assets/images/salwa.jpeg",
-      'title': 'Khalid',
-      'address': 'Samarbagh Dir Lower'
-    },
-    {
+  Future<void> fetchManagers() async {
+    try {
+      QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('ManagerProfile').get();
+      Managers = snapshot.docs.map((doc) {
+        return {
+          'title': doc['name'],
+          'image': doc['imageUrl'],
+          'address': doc['address'],
+        };
+      }).toList();
+      notifyListeners(); // Notify listeners to update UI
+    } catch (e) {
+      print('Error fetching managers: $e');
+    }
+  }
 
-      'image': "assets/images/salwa.jpeg",
-      'title': 'Sajjad Ahmad',
-      'address': 'Denin Chitral'
-    },
-    {
-
-      'image': "assets/images/salwa.jpeg",
-      'title': 'mansoor Ali',
-      'address': 'Town Chitral'
-    },
-
-
-  ];
-  List<Map<String,dynamic>> get Managers=> _Managers;
-
-  List<Map<String,dynamic>> _favorite = [];
-  List<Map<String,dynamic>> get favorite => _favorite;
-
- void additem (Map<String,dynamic> item){
-   _favorite.add(item);
-   notifyListeners();
- }
-  void removeitem (Map<String,dynamic> item){
-    _favorite.remove(item);
+  void additem(Map<String, dynamic> manager) {
+    favorite.add(manager);
     notifyListeners();
   }
- }
+
+  void removeitem(Map<String, dynamic> manager) {
+    favorite.remove(manager);
+    notifyListeners();
+  }
+}

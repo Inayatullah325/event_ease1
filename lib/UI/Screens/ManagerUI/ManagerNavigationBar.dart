@@ -1,12 +1,14 @@
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
 import 'package:event_ease/UI/Screens/Dashboard.dart';
+import 'package:event_ease/UI/Screens/ProfileScreen/ManagerProfileMain.dart';
 import 'package:event_ease/UI/Screens/ProfileScreen/Manager_profile.dart';
 import 'package:flutter/material.dart';
 
 import '../FavoriteScreen.dart';
 import '../Manager_details.dart';
 import '../ProfileScreen/UserProfile.dart';
+import 'ExploreScreen.dart';
 
 
 class ManagerNavigationBar extends StatefulWidget {
@@ -22,10 +24,10 @@ class _ManagerNavigationBarState extends State<ManagerNavigationBar> {
   List<Widget> screens=[
 
     DashBoard(),
-  // Text('AMAN'),
     managerdetails(),
-    Text('khan'),
-    ManagerProfile(),
+  // Text('Manage User'),
+    ExploreScreen(),
+    ManagerProfileMain(),
 
 
   ];
@@ -37,7 +39,7 @@ class _ManagerNavigationBarState extends State<ManagerNavigationBar> {
     ),
     TabItem (
       icon: Icons.manage_accounts,
-      title: 'All Manager',
+      title: 'Manage User',
 
     ),
     TabItem (
