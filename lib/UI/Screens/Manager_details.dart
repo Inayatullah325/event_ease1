@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_ease/Provider/managerlist_provider.dart';
 import 'package:event_ease/UI/Screens/ManagerHistory.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +32,7 @@ class _ManagerDetailsState extends State<ManagerDetails> {
   @override
   Widget build(BuildContext context) {
     final obj_favprovider = Provider.of<favprovider>(context);
+    User? userid = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
       backgroundColor: Color(0xFFF5FCFC),
@@ -61,7 +63,7 @@ class _ManagerDetailsState extends State<ManagerDetails> {
             return Center(child: Text('No managers available'));
           }
 
-          // Firestore data retrieval
+
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (BuildContext context, int index) {
@@ -71,7 +73,7 @@ class _ManagerDetailsState extends State<ManagerDetails> {
                 color: colors[index % colors.length],
                 child: InkWell(
                   onTap: () {
-                    // Navigate to ManagerHistory screen
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -90,7 +92,7 @@ class _ManagerDetailsState extends State<ManagerDetails> {
                           backgroundImage: NetworkImage(
                             data['image'] != null
                                 ? data['image']
-                                : 'https://via.placeholder.com/150', // Fallback image
+                                : 'https://via.placeholder.com/150',
                           ),
                         ),
                         title: Text(data['name'] ?? 'No Name'),
@@ -98,9 +100,9 @@ class _ManagerDetailsState extends State<ManagerDetails> {
                         trailing: InkWell(
                           onTap: () {
                             if (vm.favorite.contains(data.id)) {
-                              // vm.removeitem();
+
                             } else {
-                              // obj_favprovider.additem();
+
                             }
                           },
                           child: Icon(
