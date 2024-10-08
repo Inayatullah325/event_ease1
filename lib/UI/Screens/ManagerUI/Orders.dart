@@ -52,8 +52,8 @@ class _OrdersState extends State<Orders> {
                     backgroundColor: Colors.white,
                     child: InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => OrderScreen(
-                            name: data['name'], address: data['address'],
+                          Navigator.push(context, MaterialPageRoute(builder: (_) => OrderDetailScreen(
+                            name: data['name'], address: data['address'], documentId: '',
                           )));
 
                         },

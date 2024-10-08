@@ -28,7 +28,7 @@ class _ManagerNavigationBarState extends State<ManagerNavigationBar> {
     DashBoard(),
     //Orders(),
     ManagerDetails(),
-   //OrderScreen(),
+   //OrderDetailScreen(documentId: 'documentId', name: "null", address: "null",),
     ExploreScreen(),
     ManagerProfileMain(),
 

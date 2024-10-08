@@ -1,291 +1,105 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class OrderScreen extends StatefulWidget {
-  const OrderScreen({super.key, required name, required address});
+class OrderDetailScreen extends StatefulWidget {
+  final String documentId;
+
+  const OrderDetailScreen({super.key, required this.documentId, required name, required address});
 
   @override
-  State<OrderScreen> createState() => _OrderScreenState();
+  State<OrderDetailScreen> createState() => _OrderDetailScreenState();
 }
 
-class _OrderScreenState extends State<OrderScreen> {
+class _OrderDetailScreenState extends State<OrderDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order ' ,style: GoogleFonts.kalam(
-            fontWeight: FontWeight.bold,fontSize: 22.sp,color: Colors.white),),
+        title: Text(
+          'Order details',
+          style: GoogleFonts.kalam(
+              fontWeight: FontWeight.bold, fontSize: 22.sp, color: Colors.white),
+        ),
         backgroundColor: Color(0XFF2f9494),
         centerTitle: true,
       ),
-
-      body:
-      Padding(
+      body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height*0.65,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Color(0xFFCCF2F2),
-              borderRadius: BorderRadius.circular(20)
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              'Event types:',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              'Birthday',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                    ],
-                  ),
+        child: StreamBuilder<DocumentSnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('orders') // Assuming 'orders' is the collection
+              .doc(widget.documentId)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            }
+
+            if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            }
+
+            if (!snapshot.hasData || !snapshot.data!.exists) {
+              return Center(child: Text('No order details found.'));
+            }
+
+            var orderData = snapshot.data!.data() as Map<String, dynamic>;
+
+            return SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.65,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color(0xFFCCF2F2),
+                  borderRadius: BorderRadius.circular(20),
                 ),
-          
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              'Name:',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              'Inayat Ullah',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  children: [
+                    _buildDetailRow('Event type:', orderData['eventType'] ?? ''),
+                    _buildDetailRow('Name:', orderData['name'] ?? ''),
+                    _buildDetailRow('Address:', orderData['address'] ?? ''),
+                    _buildDetailRow(
+                        'Phone number:', orderData['phoneNumber'] ?? ''),
+                    _buildDetailRow(
+                        'Number of guests:', orderData['guestCount']?.toString() ?? ''),
+                    _buildDetailRow('Budget:', orderData['budget']?.toString() ?? ''),
+                    _buildDetailRow('Event time:', orderData['eventTime'] ?? ''),
+                    _buildDetailRow(
+                        'Selected services:', orderData['services'] ?? ''),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              'Address:',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              'Porana jamuxy'
-                                  ' chitral',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              'Phone number:',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              '03408285176',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              'Number of gust:',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              '250',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              'Budget:',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              '1000000',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                              child: Text(
-                                'Evetnt time:',
-                                style: TextStyle(
-                                    fontSize: 17, fontWeight: FontWeight.bold),
-                              ))
-          
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                              child: Text(
-                                'Evening:',
-                                style: TextStyle(
-                                    fontSize: 17, fontWeight: FontWeight.bold),
-                              ))
-          
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              'select services:',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                              'Entertainment',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                    ],
-                  ),
-                ),
-          
-          
-          
-          
-          
-          
-          
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: Center(
-                //       child: Text(
-                //         'Decoration',
-                //         style: TextStyle(
-                //             fontSize: 17, fontWeight: FontWeight.bold),
-                //       )),
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: Center(
-                //       child: Text(
-                //         'cake',
-                //         style: TextStyle(
-                //             fontSize: 17, fontWeight: FontWeight.bold),
-                //       )),
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: Center(
-                //       child: Text(
-                //         'Entertainment',
-                //         style: TextStyle(
-                //             fontSize: 17, fontWeight: FontWeight.bold),
-                //       )),
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: Center(
-                //       child: Text(
-                //         'Photography ',
-                //         style: TextStyle(
-                //             fontSize: 17, fontWeight: FontWeight.bold),
-                //       )),
-                // ),
-          
-          
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
+      ),
+    );
+  }
+
+  Widget _buildDetailRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+                child: Text(
+                  label,
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+                child: Text(
+                  value,
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                )),
+          ),
+        ],
       ),
     );
   }
