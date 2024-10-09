@@ -76,14 +76,15 @@ class _CategoryOfManagerState extends State<CategoryOfManager> {
                     color: colors[index],
                     child:  InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (_)=>
-                            ManagerHistory(
-                                image:  list[index]['image'].toString(),
-                                title:  list[index]['title'].toString() ,
-                                address:  list[index]['address'].toString(),
-                         )
-                          ,)
-                        );
+                        // Navigator.push(context, MaterialPageRoute(builder: (_)=>
+                        //     ManagerHistory(
+                        //         image:  list[index]['image'].toString(),
+                        //         title:  list[index]['title'].toString() ,
+                        //         address:  list[index]['address'].toString(),
+                        //         userid: ,
+                        //  )
+                        //   ,)
+                        // );
                       },
                       child: ListTile(
                         subtitle: Text(list[index]['address']),

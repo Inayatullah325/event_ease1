@@ -12,7 +12,6 @@ import 'ExploreScreen.dart';
 import 'OrderDetailsScreen.dart';
 import 'Orders.dart';
 
-
 class ManagerNavigationBar extends StatefulWidget {
   const ManagerNavigationBar({super.key});
 
@@ -21,36 +20,29 @@ class ManagerNavigationBar extends StatefulWidget {
 }
 
 class _ManagerNavigationBarState extends State<ManagerNavigationBar> {
-
   int selectedvalue = 0;
-  List<Widget> screens=[
-
+  List<Widget> screens = [
     DashBoard(),
-    //Orders(),
-    ManagerDetails(),
-   //OrderDetailScreen(documentId: 'documentId', name: "null", address: "null",),
+    Orders(),
+
+    //OrderDetailScreen(documentId: 'documentId', name: "null", address: "null",),
     ExploreScreen(),
     ManagerProfileMain(),
-
-
   ];
-  List<TabItem> items=[
-    TabItem (
+  List<TabItem> items = [
+    TabItem(
       icon: Icons.home,
       title: 'Home',
-
     ),
-    TabItem (
+    TabItem(
       icon: Icons.manage_accounts,
       title: 'Manage User',
-
     ),
-    TabItem (
+    TabItem(
       icon: Icons.explore,
       title: 'Explore',
-
     ),
-    TabItem (
+    TabItem(
       icon: Icons.person,
       title: 'Profile',
     ),
@@ -58,11 +50,11 @@ class _ManagerNavigationBarState extends State<ManagerNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar:BottomBarInspiredInside(
+      bottomNavigationBar: BottomBarInspiredInside(
         indexSelected: selectedvalue,
-        onTap: (index){
+        onTap: (index) {
           setState(() {
-            selectedvalue=index;
+            selectedvalue = index;
           });
         },
         items: items,
@@ -72,16 +64,13 @@ class _ManagerNavigationBarState extends State<ManagerNavigationBar> {
         itemStyle: ItemStyle.circle,
         animated: true,
         isAnimated: true,
-
         chipStyle: ChipStyle(
             background: Color(0XFF2f9494),
-            notchSmoothness: NotchSmoothness.sharpEdge
-        ),
+            notchSmoothness: NotchSmoothness.sharpEdge),
       ),
       body: Center(
         child: screens[selectedvalue],
       ),
-
     );
   }
 }

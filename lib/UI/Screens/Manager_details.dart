@@ -81,6 +81,7 @@ class _ManagerDetailsState extends State<ManagerDetails> {
                           title: data['name'].toString(),
                           image: data['image'].toString(),
                           address: data['address'].toString(),
+                          Userid: data['userId'],
                         ),
                       ),
                     );

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -43,6 +44,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   @override
   Widget build(BuildContext context) {
+    User? userid=FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -338,6 +340,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         'members': MemberControler.text,
                         'space': SpaceControler.text,
                         'budget': BudgetController.text,
+                        'userid':userid!.uid,
                         'timestamp': Timestamp.now(),
                       });
                       ScaffoldMessenger.of(context).showSnackBar(

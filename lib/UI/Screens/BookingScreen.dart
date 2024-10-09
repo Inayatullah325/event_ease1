@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Firestore import
 
 class BookingScreen extends StatefulWidget {
-  const BookingScreen({super.key});
+  const BookingScreen({super.key, required this.Userid});
+  final String Userid;
 
   @override
   State<BookingScreen> createState() => _BookingScreenState();
@@ -18,8 +20,13 @@ class _BookingScreenState extends State<BookingScreen> {
   bool isOpen = false;
   String eventType = 'Event Types';
   List<String> typesOfEvents = [
-    'Marriage', 'Engagement', 'Birthday', 'Anniversary', 'Get-Togethers',
-    'Graduation Parties', 'Other'
+    'Marriage',
+    'Engagement',
+    'Birthday',
+    'Anniversary',
+    'Get-Togethers',
+    'Graduation Parties',
+    'Other'
   ];
 
   TextEditingController guestsController = TextEditingController();
@@ -57,19 +64,23 @@ class _BookingScreenState extends State<BookingScreen> {
     String budget = budgetController.text.trim();
     String eventDate = dateController.text.trim();
     String services = _getSelectedServices();
+    String Datetime = DateFormat('dd-MM-yyyy HH:mm').format(DateTime.now());
 
-
-    if (name.isEmpty || address.isEmpty || phone.isEmpty || guests.isEmpty
-        || budget.isEmpty || eventDate.isEmpty || eventType == 'Event Types') {
+    if (name.isEmpty ||
+        address.isEmpty ||
+        phone.isEmpty ||
+        guests.isEmpty ||
+        budget.isEmpty ||
+        eventDate.isEmpty ||
+        eventType == 'Event Types') {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Please fill all required fields'))
-      );
+          SnackBar(content: Text('Please fill all required fields')));
       return;
     }
 
-
     try {
       await FirebaseFirestore.instance.collection('bookings').add({
+        'userid': widget.Userid,
         'name': name,
         'address': address,
         'phone': phone,
@@ -79,19 +90,17 @@ class _BookingScreenState extends State<BookingScreen> {
         'event_type': eventType,
         'event_time': eventTime,
         'services': services,
-        'timestamp': FieldValue.serverTimestamp(),
+        'timestamp': Datetime
       });
 
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Booking Successful'))
-      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Booking Successful')));
 
       // Clear form after successful booking
       _clearForm();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to book the event: $e'))
-      );
+          SnackBar(content: Text('Failed to book the event: $e')));
     }
   }
 
@@ -130,7 +139,9 @@ class _BookingScreenState extends State<BookingScreen> {
         title: Text(
           'Events Booking',
           style: GoogleFonts.kalam(
-              fontWeight: FontWeight.bold, fontSize: 22.sp, color: Colors.white),
+              fontWeight: FontWeight.bold,
+              fontSize: 22.sp,
+              color: Colors.white),
         ),
         backgroundColor: Color(0XFF2f9494),
         centerTitle: true,
@@ -161,7 +172,9 @@ class _BookingScreenState extends State<BookingScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(eventType),
-                        Icon(isOpen ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down)
+                        Icon(isOpen
+                            ? Icons.keyboard_arrow_up
+                            : Icons.keyboard_arrow_down)
                       ],
                     ),
                   ),
@@ -171,21 +184,24 @@ class _BookingScreenState extends State<BookingScreen> {
                 ListView(
                   primary: true,
                   shrinkWrap: true,
-                  children: typesOfEvents.map((e) => Container(
-                    decoration: BoxDecoration(),
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          isOpen = false;
-                          eventType = e;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        child: Text(e),
-                      ),
-                    ),
-                  )).toList(),
+                  children: typesOfEvents
+                      .map((e) => Container(
+                            decoration: BoxDecoration(),
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  isOpen = false;
+                                  eventType = e;
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                child: Text(e),
+                              ),
+                            ),
+                          ))
+                      .toList(),
                 ),
               Container(
                 child: Column(
@@ -238,7 +254,12 @@ class _BookingScreenState extends State<BookingScreen> {
     );
   }
 
-  Widget _buildTextField({required TextEditingController controller, required String labelText, required String hintText, required IconData prefixIcon, TextInputType? keyboardType}) {
+  Widget _buildTextField(
+      {required TextEditingController controller,
+      required String labelText,
+      required String hintText,
+      required IconData prefixIcon,
+      TextInputType? keyboardType}) {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: TextField(
@@ -287,7 +308,8 @@ class _BookingScreenState extends State<BookingScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Event Time", style: TextStyle(fontSize: 19.sp, fontWeight: FontWeight.bold)),
+        Text("Event Time",
+            style: TextStyle(fontSize: 19.sp, fontWeight: FontWeight.bold)),
         Row(
           children: [
             Radio<String>(
@@ -320,7 +342,8 @@ class _BookingScreenState extends State<BookingScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Select Services", style: TextStyle(fontSize: 19.sp, fontWeight: FontWeight.bold)),
+        Text("Select Services",
+            style: TextStyle(fontSize: 19.sp, fontWeight: FontWeight.bold)),
         Row(
           children: [
             Checkbox(
@@ -372,7 +395,7 @@ class _BookingScreenState extends State<BookingScreen> {
   Widget _buildSubmitButton() {
     return Center(
       child: InkWell(
-        onTap: _bookEvent,  // Call the function to save data in Firestore
+        onTap: _bookEvent, // Call the function to save data in Firestore
         child: Container(
           height: MediaQuery.of(context).size.height * 0.07,
           width: MediaQuery.of(context).size.width * 0.4,
@@ -383,7 +406,10 @@ class _BookingScreenState extends State<BookingScreen> {
           child: Center(
             child: Text(
               'Book Now',
-              style: GoogleFonts.kalam(fontSize: 20.sp, fontWeight: FontWeight.bold, color: Colors.white),
+              style: GoogleFonts.kalam(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
           ),
         ),
