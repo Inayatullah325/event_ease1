@@ -482,39 +482,37 @@ class ManagerHistory extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Center(
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => BookingScreen(
-                                          Userid: snapshot.data!.docs[0]
-                                              ['userid']),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.09,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.6,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0XFF2f9494),
-                                    borderRadius: BorderRadius.circular(10.h),
+                                child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => BookingScreen(
+                                        Userid: snapshot.data!.docs[0]
+                                            ['userid']),
                                   ),
-                                  child: Center(
-                                    child: Text(
-                                      'Use Service',
-                                      style: GoogleFonts.kalam(
-                                        fontSize: 22.sp,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
+                                );
+                              },
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.09,
+                                width: MediaQuery.of(context).size.width * 0.6,
+                                decoration: BoxDecoration(
+                                  color: const Color(0XFF2f9494),
+                                  borderRadius: BorderRadius.circular(10.h),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Use Service',
+                                    style: GoogleFonts.kalam(
+                                      fontSize: 22.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
+                            )),
                           ),
                         ]);
                   })),

@@ -35,8 +35,8 @@ class _ManagerNavigationBarState extends State<ManagerNavigationBar> {
       title: 'Home',
     ),
     TabItem(
-      icon: Icons.manage_accounts,
-      title: 'Manage User',
+      icon: Icons.list,
+      title: 'Orders',
     ),
     TabItem(
       icon: Icons.explore,

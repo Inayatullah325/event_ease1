@@ -52,11 +52,22 @@ class _ManagerProfileMainState extends State<ManagerProfileMain> {
                         .doc(userid!.uid)
                         .snapshots(),
                     builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+
+                      if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      }
+
+                      if (!snapshot.hasData || snapshot.data == null) {
+                        return Center(child: Text('No managers available'));
+                      }
                       var data = snapshot.data!;
                       return Wrap(
                         children: [
                           CircleAvatar(
-                            maxRadius: 50,
+                            radius: 50,
                             backgroundImage: NetworkImage(data['image']),
                           ),
                           ListTile(
@@ -110,135 +121,137 @@ class _ManagerProfileMainState extends State<ManagerProfileMain> {
           Container(
             child: Expanded(
                 child: ListView(
-                  children: [
-                    Card(
-                      margin:
+              children: [
+                Card(
+                  margin:
                       const EdgeInsets.only(left: 35, right: 35, bottom: 10),
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.privacy_tip_sharp,
-                          color: Colors.black54,
-                        ),
-                        title: Text(
-                          'Privacy',
-                          style: TextStyle(
-                              fontSize: .25.dp, fontWeight: FontWeight.bold),
-                        ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          color: Colors.black54,
-                        ),
-                      ),
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.privacy_tip_sharp,
+                      color: Colors.black54,
                     ),
-                    SizedBox(
-                      height: 1.h,
+                    title: Text(
+                      'Privacy',
+                      style: TextStyle(
+                          fontSize: .25.dp, fontWeight: FontWeight.bold),
                     ),
-                    Card(
-                      color: Colors.white,
-                      margin:
+                    trailing: Icon(
+                      Icons.arrow_forward_ios_outlined,
+                      color: Colors.black54,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Card(
+                  color: Colors.white,
+                  margin:
                       const EdgeInsets.only(left: 35, right: 35, bottom: 10),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      child: ListTile(
-                        leading: Icon(Icons.help_outline, color: Colors.black54),
-                        title: Text(
-                          'Help & Support',
-                          style: TextStyle(
-                              fontSize: .25.dp, fontWeight: FontWeight.bold),
-                        ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          color: Colors.black54,
-                        ),
-                      ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  child: ListTile(
+                    leading: Icon(Icons.help_outline, color: Colors.black54),
+                    title: Text(
+                      'Help & Support',
+                      style: TextStyle(
+                          fontSize: .25.dp, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
-                      height: 1.h,
+                    trailing: Icon(
+                      Icons.arrow_forward_ios_outlined,
+                      color: Colors.black54,
                     ),
-                    Card(
-                      color: Colors.white,
-                      margin:
+                  ),
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Card(
+                  color: Colors.white,
+                  margin:
                       const EdgeInsets.only(left: 35, right: 35, bottom: 10),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.privacy_tip_sharp,
-                          color: Colors.black54,
-                        ),
-                        title: Text(
-                          'Settings',
-                          style: TextStyle(
-                              fontSize: .25.dp, fontWeight: FontWeight.bold),
-                        ),
-                        trailing: Icon(Icons.arrow_forward_ios_outlined),
-                      ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.privacy_tip_sharp,
+                      color: Colors.black54,
                     ),
-                    SizedBox(
-                      height: 1.h,
+                    title: Text(
+                      'Settings',
+                      style: TextStyle(
+                          fontSize: .25.dp, fontWeight: FontWeight.bold),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => themescreen()));
-                      },
-                      child: Card(
-                        color: Colors.white,
-                        margin:
+                    trailing: Icon(Icons.arrow_forward_ios_outlined),
+                  ),
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => themescreen()));
+                  },
+                  child: Card(
+                    color: Colors.white,
+                    margin:
                         const EdgeInsets.only(left: 35, right: 35, bottom: 10),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.brightness_4,
-                            color: Colors.black54,
-                          ),
-                          title: Text(
-                            'Themes',
-                            style: TextStyle(
-                                fontSize: .25.dp, fontWeight: FontWeight.bold),
-                          ),
-                          trailing: Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            color: Colors.black54,
-                          ),
-                        ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.brightness_4,
+                        color: Colors.black54,
+                      ),
+                      title: Text(
+                        'Themes',
+                        style: TextStyle(
+                            fontSize: .25.dp, fontWeight: FontWeight.bold),
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        color: Colors.black54,
                       ),
                     ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        FirebaseAuth.instance.signOut();
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MyAlertDialog()));
-                      },
-                      child: Card(
-                        color: Colors.white,
-                        margin:
+                  ),
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                InkWell(
+                  onTap: () {
+                    FirebaseAuth.instance.signOut();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MyAlertDialog()));
+                  },
+                  child: Card(
+                    color: Colors.white,
+                    margin:
                         const EdgeInsets.only(left: 35, right: 35, bottom: 10),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.logout,
-                            color: Colors.black54,
-                          ),
-                          title: Text(
-                            'Logout',
-                            style: TextStyle(
-                                fontSize: .25.dp, fontWeight: FontWeight.bold),
-                          ),
-                          trailing: Icon(Icons.arrow_forward_ios_outlined),
-                        ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.logout,
+                        color: Colors.black54,
                       ),
-                    )
-                  ],
-                )),
+                      title: Text(
+                        'Logout',
+                        style: TextStyle(
+                            fontSize: .25.dp, fontWeight: FontWeight.bold),
+                      ),
+                      trailing: Icon(Icons.arrow_forward_ios_outlined),
+                    ),
+                  ),
+                )
+              ],
+            )),
           )
         ],
       ),
