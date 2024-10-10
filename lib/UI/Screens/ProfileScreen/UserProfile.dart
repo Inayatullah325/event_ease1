@@ -19,17 +19,16 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  bool isselected = false;
-  bool isselected1 = false;
-  bool isselected2 = false;
-  bool isselected3 = false;
-  bool isselected4 = false;
-  bool isselected5 = false;
+  // bool isselected = false;
+  // bool isselected1 = false;
+  // bool isselected2 = false;
+  // bool isselected3 = false;
+  // bool isselected4 = false;
+  // bool isselected5 = false;
 
   TextEditingController NameController = TextEditingController();
   TextEditingController AddressController = TextEditingController();
   TextEditingController PhoneController = TextEditingController();
-  TextEditingController PasswordController = TextEditingController();
 
   File? imageFile;
   String? imageUrl;
@@ -39,7 +38,7 @@ class _UserProfileState extends State<UserProfile> {
     NameController.clear();
     AddressController.clear();
     PhoneController.clear();
-    PasswordController.clear();
+    //PasswordController.clear();
 
     setState(() {});
   }
@@ -49,7 +48,7 @@ class _UserProfileState extends State<UserProfile> {
     String name = NameController.text.trim();
     String address = AddressController.text.trim();
     String phone = PhoneController.text.trim();
-    String guests = PasswordController.text.trim();
+   // String guests = PasswordController.text.trim();
 
 
     // Check if all the necessary fields are filled
@@ -259,37 +258,37 @@ class _UserProfileState extends State<UserProfile> {
                         ),
                       ),
                       // Password
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          controller: PasswordController,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(11),
-                              borderSide: BorderSide(
-                                width: 1,
-                                color: Colors.black,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(11),
-                              borderSide: BorderSide(width: 2, color: Colors.black),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(11),
-                            ),
-                            suffixIcon: Icon(Icons.edit),
-                            prefixIcon: Icon(
-                              Icons.remove_red_eye_rounded,
-                              color: Colors.black,
-                            ),
-                            hintText: 'Pakistan@123',
-                            hintStyle: TextStyle(color: Colors.grey),
-                            labelText: 'Password',
-                            labelStyle: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: TextField(
+                      //     controller: PasswordController,
+                      //     decoration: InputDecoration(
+                      //       enabledBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(11),
+                      //         borderSide: BorderSide(
+                      //           width: 1,
+                      //           color: Colors.black,
+                      //         ),
+                      //       ),
+                      //       focusedBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(11),
+                      //         borderSide: BorderSide(width: 2, color: Colors.black),
+                      //       ),
+                      //       border: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(11),
+                      //       ),
+                      //       suffixIcon: Icon(Icons.edit),
+                      //       prefixIcon: Icon(
+                      //         Icons.remove_red_eye_rounded,
+                      //         color: Colors.black,
+                      //       ),
+                      //       hintText: 'Pakistan@123',
+                      //       hintStyle: TextStyle(color: Colors.grey),
+                      //       labelText: 'Password',
+                      //       labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

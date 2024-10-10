@@ -46,7 +46,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.65,
+            height: MediaQuery.of(context).size.height * 0.68,
             width: double.infinity,
             decoration: BoxDecoration(
                 color: Color(0xFFCCF2F2),

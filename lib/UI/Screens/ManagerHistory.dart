@@ -319,7 +319,7 @@ class ManagerHistory extends StatelessWidget {
                                           width: double.infinity,
                                           //MediaQuery.of(context).size.width * 0.9,
                                           decoration: BoxDecoration(
-                                            color: Colors.red,
+                                            color: Colors.grey,
                                             borderRadius:
                                                 BorderRadius.circular(5.h),
                                             image: DecorationImage(

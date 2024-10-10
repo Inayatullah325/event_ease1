@@ -335,7 +335,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     if(Discriptioncoltroller.text.isEmpty||MemberControler.text.isEmpty||
                         SpaceControler.text.isEmpty||BudgetController.text.isEmpty){
                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Please fill the field:'))
+                          SnackBar(content: Text('Please fill all required fields'))
                       );
                        return;
                     }

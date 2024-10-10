@@ -19,17 +19,11 @@ class ManagerProfile extends StatefulWidget {
 }
 
 class _ManagerProfileState extends State<ManagerProfile> {
-  bool isselected = false;
-  bool isselected1 = false;
-  bool isselected2 = false;
-  bool isselected3 = false;
-  bool isselected4 = false;
-  bool isselected5 = false;
+
 
   TextEditingController NameController = TextEditingController();
   TextEditingController AddressController = TextEditingController();
   TextEditingController PhoneController = TextEditingController();
-  TextEditingController PasswordController = TextEditingController();
 
   File? imageFile;
   String? imageUrl;
@@ -38,7 +32,6 @@ class _ManagerProfileState extends State<ManagerProfile> {
     NameController.clear();
     AddressController.clear();
     PhoneController.clear();
-    PasswordController.clear();
 
     setState(() {});
   }
@@ -110,6 +103,7 @@ class _ManagerProfileState extends State<ManagerProfile> {
                   top: 40,
                   child: GestureDetector(
                     onTap: () {
+
                       pickImage();
                     },
                     child: Container(
@@ -248,38 +242,38 @@ class _ManagerProfileState extends State<ManagerProfile> {
                         ),
                       ),
                       // Password
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          controller: PasswordController,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(11),
-                              borderSide: BorderSide(
-                                width: 1,
-                                color: Colors.black,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(11),
-                              borderSide:
-                                  BorderSide(width: 2, color: Colors.black),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(11),
-                            ),
-                            suffixIcon: Icon(Icons.edit),
-                            prefixIcon: Icon(
-                              Icons.remove_red_eye_rounded,
-                              color: Colors.black,
-                            ),
-                            hintText: 'Pakistan@123',
-                            hintStyle: TextStyle(color: Colors.grey),
-                            labelText: 'Password',
-                            labelStyle: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: TextField(
+                      //     controller: PasswordController,
+                      //     decoration: InputDecoration(
+                      //       enabledBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(11),
+                      //         borderSide: BorderSide(
+                      //           width: 1,
+                      //           color: Colors.black,
+                      //         ),
+                      //       ),
+                      //       focusedBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(11),
+                      //         borderSide:
+                      //             BorderSide(width: 2, color: Colors.black),
+                      //       ),
+                      //       border: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(11),
+                      //       ),
+                      //       suffixIcon: Icon(Icons.edit),
+                      //       prefixIcon: Icon(
+                      //         Icons.remove_red_eye_rounded,
+                      //         color: Colors.black,
+                      //       ),
+                      //       hintText: 'Pakistan@123',
+                      //       hintStyle: TextStyle(color: Colors.grey),
+                      //       labelText: 'Password',
+                      //       labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -290,6 +284,13 @@ class _ManagerProfileState extends State<ManagerProfile> {
                   padding: const EdgeInsets.symmetric(vertical: 50),
                   child: GestureDetector(
                     onTap: () async {
+                      if(NameController.text.isEmpty||AddressController.text.isEmpty||
+                          PhoneController.text.isEmpty){
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Please fill all required fields'))
+                        );
+                        return;
+                      }
                       try {
                         FirebaseFirestore.instance
                             .collection('Users')
