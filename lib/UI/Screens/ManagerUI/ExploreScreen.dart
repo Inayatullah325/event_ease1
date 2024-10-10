@@ -39,7 +39,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
 
 
-  String? imageUrl;
+  String imageUrl="";
   XFile? file;
 
   @override
@@ -143,22 +143,25 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   // Give pic a unique name
                   Reference imagetoUpload = referenceDirImages.child(uniqueFilename);
 
-                  // Upload image to Firebase
-                  try {
-                    await imagetoUpload.putFile(File(file!.path));
-                    imageUrl = await imagetoUpload.getDownloadURL();
-                    print(imageUrl);
-                  } catch (e) {
-                    print(e);
-                  }
+                  await imagetoUpload.putFile(File(file!.path));
+                  imageUrl = await imagetoUpload.getDownloadURL();
 
-                  // Add link to the specific user doc
-                  FirebaseFirestore.instance
-                      .collection('Eventdata')
-                      .doc(docId.toString())
-                      .update({
-                    'image': imageUrl,
-                  }).then((value) => Navigator.of(context).pop());
+                  // Upload image to Firebase
+                //   try {
+                //     await imagetoUpload.putFile(File(file!.path));
+                //     imageUrl = await imagetoUpload.getDownloadURL();
+                //     print(imageUrl);
+                //   } catch (e) {
+                //     print(e);
+                //   }
+                //
+                //   // Add link to the specific user doc
+                //   FirebaseFirestore.instance
+                //       .collection('Eventdata')
+                //       .doc(docId.toString())
+                //       .update({
+                //     'image': imageUrl,
+                //   }).then((value) => Navigator.of(context).pop());
                 },
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.3,
@@ -181,7 +184,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       style: TextStyle(color: Colors.white),
                     ),
                   )
-                      : null, // If no image is selected, show this text
+                      : null,
                 ),
               ),
 
