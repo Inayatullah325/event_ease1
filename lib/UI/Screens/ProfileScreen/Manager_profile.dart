@@ -32,7 +32,7 @@ class _ManagerProfileState extends State<ManagerProfile> {
   TextEditingController PasswordController = TextEditingController();
 
   File? imageFile;
-  String? imageUrl;
+  String imageUrl = '';
 
   void _clearForm() {
     NameController.clear();
@@ -120,7 +120,8 @@ class _ManagerProfileState extends State<ManagerProfile> {
                                 fit: BoxFit.cover, image: FileImage(imageFile!))
                             : DecorationImage(
                                 fit: BoxFit.contain,
-                                image: NetworkImage('assets/images/salwa1.jpeg')),
+                                image:
+                                    NetworkImage('assets/images/salwa1.jpeg')),
                         color: Colors.white,
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.black),
@@ -290,6 +291,13 @@ class _ManagerProfileState extends State<ManagerProfile> {
                   padding: const EdgeInsets.symmetric(vertical: 50),
                   child: GestureDetector(
                     onTap: () async {
+                      if (NameController.text.isEmpty ||
+                          AddressController.text.isEmpty ||
+                          PhoneController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('Please fill all required fields')));
+                        return;
+                      }
                       try {
                         FirebaseFirestore.instance
                             .collection('Users')

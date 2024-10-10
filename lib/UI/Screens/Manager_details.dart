@@ -49,7 +49,10 @@ class _ManagerDetailsState extends State<ManagerDetails> {
         centerTitle: true,
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection("Users").where('role',isEqualTo:"manager" ).snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection("Users")
+            .where('role', isEqualTo: "manager")
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -63,7 +66,6 @@ class _ManagerDetailsState extends State<ManagerDetails> {
             return Center(child: Text('No managers available'));
           }
 
-
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (BuildContext context, int index) {
@@ -73,7 +75,6 @@ class _ManagerDetailsState extends State<ManagerDetails> {
                 color: colors[index % colors.length],
                 child: InkWell(
                   onTap: () {
-
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -82,6 +83,7 @@ class _ManagerDetailsState extends State<ManagerDetails> {
                           image: data['image'].toString(),
                           address: data['address'].toString(),
                           Userid: data['userId'],
+                         
                         ),
                       ),
                     );
@@ -101,10 +103,7 @@ class _ManagerDetailsState extends State<ManagerDetails> {
                         trailing: InkWell(
                           onTap: () {
                             if (vm.favorite.contains(data.id)) {
-
-                            } else {
-
-                            }
+                            } else {}
                           },
                           child: Icon(
                             vm.favorite.contains(data.id)

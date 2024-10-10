@@ -32,8 +32,7 @@ class _UserProfileState extends State<UserProfile> {
   TextEditingController PasswordController = TextEditingController();
 
   File? imageFile;
-  String? imageUrl;
-
+  String imageUrl = '';
 
   void _clearForm() {
     NameController.clear();
@@ -51,31 +50,33 @@ class _UserProfileState extends State<UserProfile> {
     String phone = PhoneController.text.trim();
     String guests = PasswordController.text.trim();
 
-
     // Check if all the necessary fields are filled
     if (name.isEmpty || address.isEmpty || phone.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Please fill all required fields'))
-      );
+          SnackBar(content: Text('Please fill all required fields')));
       return;
     }
   }
 
   Future<void> pickImage() async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       setState(() {
-        imageFile = File(pickedFile.path);
+        imageFile = File(pickedFile!.path);
       });
 
       String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-      Reference storageRef = FirebaseStorage.instance.ref().child('user_image').child(uniqueFileName);
+      Reference storageRef = FirebaseStorage.instance
+          .ref()
+          .child('user_image')
+          .child(uniqueFileName);
 
       try {
         await storageRef.putFile(imageFile!);
         imageUrl = await storageRef.getDownloadURL();
-        setState(() {});  // Update the state to reflect the new image
+        setState(() {}); // Update the state to reflect the new image
       } catch (e) {
         print('Error uploading image: $e');
       }
@@ -84,7 +85,7 @@ class _UserProfileState extends State<UserProfile> {
 
   @override
   Widget build(BuildContext context) {
-    User? userid=FirebaseAuth.instance.currentUser;
+    User? userid = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
       backgroundColor: Color(0xFFF5FCFC),
@@ -92,7 +93,9 @@ class _UserProfileState extends State<UserProfile> {
         title: Text(
           'User Profile',
           style: GoogleFonts.kalam(
-              fontWeight: FontWeight.bold, fontSize: 22.sp, color: Colors.white),
+              fontWeight: FontWeight.bold,
+              fontSize: 22.sp,
+              color: Colors.white),
         ),
         backgroundColor: Color(0XFF2f9494),
         centerTitle: true,
@@ -130,11 +133,10 @@ class _UserProfileState extends State<UserProfile> {
                       decoration: BoxDecoration(
                         image: imageFile != null
                             ? DecorationImage(
-                            fit: BoxFit.cover,
-                            image: FileImage(imageFile!))
+                                fit: BoxFit.cover, image: FileImage(imageFile!))
                             : DecorationImage(
-                            fit: BoxFit.contain,
-                            image: AssetImage('assets/images/salwa1.jpeg')),
+                                fit: BoxFit.contain,
+                                image: AssetImage('assets/images/salwa1.jpeg')),
                         color: Colors.white,
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.black),
@@ -176,7 +178,8 @@ class _UserProfileState extends State<UserProfile> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(11),
-                              borderSide: BorderSide(width: 2, color: Colors.black),
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.black),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(11),
@@ -208,7 +211,8 @@ class _UserProfileState extends State<UserProfile> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(11),
-                              borderSide: BorderSide(width: 2, color: Colors.black),
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.black),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(11),
@@ -241,7 +245,8 @@ class _UserProfileState extends State<UserProfile> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(11),
-                              borderSide: BorderSide(width: 2, color: Colors.black),
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.black),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(11),
@@ -273,7 +278,8 @@ class _UserProfileState extends State<UserProfile> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(11),
-                              borderSide: BorderSide(width: 2, color: Colors.black),
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.black),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(11),
@@ -300,23 +306,31 @@ class _UserProfileState extends State<UserProfile> {
                   padding: const EdgeInsets.symmetric(vertical: 50),
                   child: GestureDetector(
                     onTap: () async {
+                      if (NameController.text.isEmpty ||
+                          AddressController.text.isEmpty ||
+                          PhoneController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('Please fill all required fields')));
+                        return;
+                      }
                       try {
-                        FirebaseFirestore.instance.collection('Users').doc(userid!.uid).update({
+                        FirebaseFirestore.instance
+                            .collection('Users')
+                            .doc(userid!.uid)
+                            .update({
                           'image': imageUrl,
                           'name': NameController.text,
                           'address': AddressController.text,
                           'phone': PhoneController.text,
                           'timestamp': Timestamp.now(),
                         });
+                        print(" imageeeeeurlll$imageUrl");
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Update Successful'))
-
-                        );
+                            SnackBar(content: Text('Update Successful')));
                         _clearForm();
                       } catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Update Failed : $e'))
-                        );
+                            SnackBar(content: Text('Update Failed : $e')));
                       }
                     },
                     child: Container(

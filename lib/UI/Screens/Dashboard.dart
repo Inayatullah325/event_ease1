@@ -63,8 +63,7 @@ class _DashBoardState extends State<DashBoard> {
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => CategoryOfManager(
                       category: instance_dashboard.Events[index]['name'],
-                      mylist: instance_homescreen.AllCategoryManager,
-                      index: index,
+                     
 
 
                     )));

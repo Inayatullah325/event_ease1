@@ -52,7 +52,19 @@ class _UserProfileMainState extends State<UserProfileMain> {
                         .doc(userid!.uid)
                         .snapshots(),
                     builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+
+                      if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      }
+
+                      if (!snapshot.hasData || snapshot.data == null) {
+                        return Center(child: Text('No managers available'));
+                      }
                       var data = snapshot.data!;
+
                       return Wrap(
                         children: [
                           CircleAvatar(
@@ -214,8 +226,10 @@ class _UserProfileMainState extends State<UserProfileMain> {
                 InkWell(
                   onTap: () {
                     FirebaseAuth.instance.signOut();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MyAlertDialog()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MyAlertDialog()));
                   },
                   child: Card(
                     color: Colors.white,

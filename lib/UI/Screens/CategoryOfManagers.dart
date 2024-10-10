@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_ease/Provider/HomeScreen_provider.dart';
 import 'package:event_ease/UI/Screens/BookingScreen.dart';
 import 'package:event_ease/UI/Screens/ManagerHistory.dart';
@@ -8,14 +9,10 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CategoryOfManager extends StatefulWidget {
   String category;
-  int index;
-  List<Map<String, List<Map<String, dynamic>>>> mylist;
 
   CategoryOfManager({
     super.key,
-    required this.index,
     required this.category,
-    required this.mylist,
   });
 
   @override
@@ -23,20 +20,7 @@ class CategoryOfManager extends StatefulWidget {
 }
 
 class _CategoryOfManagerState extends State<CategoryOfManager> {
-  late List<Map<String, dynamic>> list;
-
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    //list = widget.mylist[widget.index][widget.category]!;
-    if (widget.index >= 0 && widget.index < widget.mylist.length) {
-      list = widget.mylist[widget.index][widget.category] ?? [];
-    } else {
-      list = [];
-    }
-  }
-
   List<Color> colors = [
     Color(0xffe5e7e9),
     Color(0xffe5e7e9),
@@ -69,34 +53,85 @@ class _CategoryOfManagerState extends State<CategoryOfManager> {
           child: Column(
             children: [
               Expanded(
-                  child: ListView.builder(
-                itemCount: list.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    color: colors[index],
-                    child:  InkWell(
-                      onTap: (){
-                        // Navigator.push(context, MaterialPageRoute(builder: (_)=>
-                        //     ManagerHistory(
-                        //         image:  list[index]['image'].toString(),
-                        //         title:  list[index]['title'].toString() ,
-                        //         address:  list[index]['address'].toString(),
-                        //         userid: ,
-                        //  )
-                        //   ,)
-                        // );
-                      },
-                      child: ListTile(
-                        subtitle: Text(list[index]['address']),
-                        leading: CircleAvatar(
-                          backgroundImage: AssetImage(list[index]['image']),
-                        ),
-                        title: Text(list[index]['title']),
-                      ),
-                    ),
-                  );
-                },
-              )),
+                  child: StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection('Eventdata')
+                          .where('eventType', isEqualTo: widget.category)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+
+                        if (snapshot.hasError) {
+                          return Center(
+                              child: Text('Error: ${snapshot.error}'));
+                        }
+
+                        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                          return Center(child: Text('No data available'));
+                        }
+                        return ListView.builder(
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            var data = snapshot.data!.docs[index];
+                            return Card(
+                              color: colors[index],
+                              child: StreamBuilder(
+                                  stream: FirebaseFirestore.instance
+                                      .collection('Users')
+                                      .doc(data['userid'])
+                                      .snapshots(),
+                                  builder: (context, sp) {
+                                    if (sp.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return const Center(child: ListTile());
+                                    }
+
+                                    if (sp.hasError) {
+                                      return Center(
+                                          child: Text('Error: ${sp.error}'));
+                                    }
+                                    var userData = sp.data!.data();
+
+                                    if (!sp.hasData || userData == null) {
+                                      return const Center(
+                                          child: Text('No history available'));
+                                    }
+                                    return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ManagerHistory(
+                                              title:
+                                                  sp.data!['name'].toString(),
+                                              image:
+                                                  sp.data!['image'].toString(),
+                                              address: sp.data!['address']
+                                                  .toString(),
+                                              Userid: sp.data!['userId'],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: ListTile(
+                                        subtitle: Text(data['eventType']),
+                                        leading: CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              sp.data!['image'] ?? ''),
+                                        ),
+                                        title:
+                                            Text(sp.data!['name'] ?? 'unknow'),
+                                      ),
+                                    );
+                                  }),
+                            );
+                          },
+                        );
+                      })),
             ],
           ),
         ));
