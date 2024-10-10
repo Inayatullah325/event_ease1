@@ -332,6 +332,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 120),
                 child: GestureDetector(
                   onTap: () async {
+                    if(Discriptioncoltroller.text.isEmpty||MemberControler.text.isEmpty||
+                        SpaceControler.text.isEmpty||BudgetController.text.isEmpty){
+                       ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Please fill the field:'))
+                      );
+                       return;
+                    }
                     try {
                       FirebaseFirestore.instance.collection('Eventdata').doc().set({
                         'image': imageUrl,
