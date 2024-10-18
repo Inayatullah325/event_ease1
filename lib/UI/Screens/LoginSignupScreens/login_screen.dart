@@ -1,13 +1,9 @@
 import 'package:event_ease/UI/RoleBase.dart';
-import 'package:event_ease/UI/Screens/Dashboard.dart';
 import 'package:event_ease/UI/Screens/LoginSignupScreens/ForgotPassword.dart';
-import 'package:event_ease/UI/Screens/ManagerUI/ManagerNavigationBar.dart';
-import 'package:event_ease/UI/Screens/navigationbuttombarr.dart';
 import 'package:event_ease/UI/Screens/LoginSignupScreens/signuppage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class loginpage extends StatefulWidget {
   const loginpage({super.key});

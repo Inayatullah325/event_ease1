@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:event_ease/Provider/HomeScreen_provider.dart';
-import 'package:event_ease/UI/Screens/BookingScreen.dart';
 import 'package:event_ease/UI/Screens/ManagerHistory.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CategoryOfManager extends StatefulWidget {

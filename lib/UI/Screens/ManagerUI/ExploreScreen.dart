@@ -145,23 +145,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
                   await imagetoUpload.putFile(File(file!.path));
                   imageUrl = await imagetoUpload.getDownloadURL();
-
-                  // Upload image to Firebase
-                //   try {
-                //     await imagetoUpload.putFile(File(file!.path));
-                //     imageUrl = await imagetoUpload.getDownloadURL();
-                //     print(imageUrl);
-                //   } catch (e) {
-                //     print(e);
-                //   }
-                //
-                //   // Add link to the specific user doc
-                //   FirebaseFirestore.instance
-                //       .collection('Eventdata')
-                //       .doc(docId.toString())
-                //       .update({
-                //     'image': imageUrl,
-                //   }).then((value) => Navigator.of(context).pop());
                 },
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.3,

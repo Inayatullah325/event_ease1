@@ -1,13 +1,8 @@
 import 'dart:async';
-
-
-import 'package:event_ease/Provider/dashboard_provider.dart';
 import 'package:event_ease/UI/RoleBase.dart';
-import 'package:event_ease/UI/Screens/LoginSignupScreens/signuppage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'LoginSignupScreens/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {

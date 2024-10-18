@@ -4,13 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../../Provider/HomeScreen_provider.dart';
-
 import 'CategoryOfManagers.dart';
-import 'LoginSignupScreens/login_screen.dart';
-import 'Manager_details.dart';
-import 'PracticeClass.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
@@ -135,9 +130,6 @@ class _DashBoardState extends State<DashBoard> {
            ),
         ],
       ),
-
-
-
     );
   }
 }

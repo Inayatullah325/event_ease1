@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:event_ease/UI/Screens/LoginSignupScreens/login_screen.dart';
 import 'package:event_ease/UI/Screens/MyAlertDailogBox.dart';
 import 'package:event_ease/UI/Screens/ProfileScreen/UserProfile.dart';
 import 'package:event_ease/UI/Screens/ThemeScreen.dart';
